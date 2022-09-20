@@ -1,0 +1,58 @@
+h1 {
+color: #005CFF;
+}
+
+.success {
+	font-size: 13px;
+	text-align: center;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border-style: dashed;
+	color: #FFF;
+}
+.fred{
+	background-color: #D56868;
+}
+
+
+.button-home:hover, .button-home:focus{
+background-color: #3e4145;
+color: #fff;
+outline: none;
+}
+
+
+a.button-home {
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+vertical-align: middle;
+text-decoration: none;
+}
+
+.home-margin-top {
+margin-top: 30px !important;
+}
+
+.home-button-large {
+min-height: 52px;
+padding: 0 32px;
+line-height: 52px;
+font-size: 18px;
+}
+
+.button-home {
+font-size: 20px;
+display: inline-block;
+min-height: 30px;
+padding: 0 12px;
+border: none;
+background: #5EBEFF;
+line-height: 30px;
+color: #fff;
+letter-spacing: normal;
+box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+border-radius: 50px;
+text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+-webkit-transition: background-color 0.15s ease-in-out;
+transition: background-color 0.15s ease-in-out;
+}

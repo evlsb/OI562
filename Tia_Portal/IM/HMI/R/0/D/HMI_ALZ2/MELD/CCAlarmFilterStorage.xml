@@ -1,0 +1,11 @@
+﻿<CCAlarmFilterStorage>
+  <CCAlarmFilter>
+    <Name>Filter_1</Name>
+    <SQL>PText1 LIKE '%%'</SQL>
+    <Comment></Comment>
+    <CreateUser>admin</CreateUser>
+    <CreateDate>12/5/2017 9:06:25 AM</CreateDate>
+    <LastUser>admin</LastUser>
+    <LastDate>6/1/2020 1:04:57 PM</LastDate>
+  </CCAlarmFilter>
+</CCAlarmFilterStorage>

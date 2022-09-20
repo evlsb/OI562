@@ -1,0 +1,88 @@
+﻿<?xml version='1.0' ?>
+<DocViewer>
+	<!--<list>
+		<name>КМХ</name>
+		<type>Month</type>
+		<template>template/operativ.php</template>
+		<descr>КМХ от {$row['dDateBegin']->format('d.m.y')} № {$row['KMH_num']}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_, 104), 104) as dDateBegin, KMH_num FROM KMH_1 Where (convert (datetime,date_,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>-->
+	<list>
+		<name>Замеры (выборка по дате)</name>
+		<type>Month</type>
+		<template>template/measuring1.php</template>
+		<descr>Замер от {$row['dDateBegin']->format('d.m.y')} № {$row['id']}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_time, 104), 104) as dDateBegin, id FROM Zamer Where (convert (datetime,date_time,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>
+
+	<!--<list>
+		<name>Оперативные отчеты (2ч)</name>
+		<type>Month</type>
+		<template>template/operativ_2h.php</template>
+		<descr>Суточный отчет от {$row['dDateBegin']->format('d.m.y')}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_, 104), 104) as dDateBegin FROM operativ_2h Where (convert (datetime,date_,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>-->
+	<!--<list>
+		<name>Суточные отчеты НГС, ГС, ТО</name>
+		<type>Month</type>
+		<template>template/reports_2h.php</template>
+		<descr>Суточный отчет от {$row['dDateBegin']->format('d.m.y')}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_, 104), 104) as dDateBegin FROM NGS_GS_TO Where (convert (datetime,date_,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>
+	<list>
+		<name>Суточные отчеты НГСВ, ОН</name>
+		<type>Month</type>
+		<template>template/reports_NGSV_ON.php</template>
+		<descr>Суточный отчет от {$row['dDateBegin']->format('d.m.y')}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_, 104), 104) as dDateBegin FROM NGSV_ON Where (convert (datetime,date_,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>
+	<list>
+		<name>Суточные отчеты КСУ, ОВ, БЕВ</name>
+		<type>Month</type>
+		<template>template/KSU_OV_BEV.php</template>
+		<descr>Суточный отчет от {$row['dDateBegin']->format('d.m.y')}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_, 104), 104) as dDateBegin FROM KSU_OV_BEV Where (convert (datetime,date_,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>
+	<list>
+		<name>СИКГ, СИКВ</name>
+		<type>Month</type>
+		<template>template/reports_SIKG.php</template>
+		<descr>Суточный отчет от {$row['dDateBegin']->format('d.m.y')}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_, 104), 104) as dDateBegin FROM SIKG Where (convert (datetime,date_,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>
+	<list>
+		<name>СИКН</name>
+		<type>Month</type>
+		<template>template/reports_SIKN.php</template>
+		<descr>Суточный отчет от {$row['dDateBegin']->format('d.m.y')}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_, 104), 104) as dDateBegin FROM SIKN Where (convert (datetime,date_,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>-->
+	<!--<list>
+		<name>Суточные отчеты АСН</name>
+		<type>Day</type>
+		<template>template/ASN.php</template>
+		<descr>Налив от {$row['dDateBegin']->format('H:i:s')}</descr>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(20), date_, 113), 113) as dDateBegin FROM ASN Where (convert (datetime,date_,113) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<vars>itype=2</vars>
+	</list>-->
+	<confBD>
+		<ServerName>DESKTOP-DQQKSJF\WINCC</ServerName>
+		<Database>OI562</Database>
+		<UID>ozna</UID>
+		<PWD>ozna</PWD>
+	</confBD>
+	<confOwner>
+		<NameObjectOwner>ПКИОС </NameObjectOwner>
+		<Owner>Северо-Восюганского месторождения</Owner>
+		<Lab>Северо-Восюганского месторождения</Lab>
+		<License>ООО "ОЗНА-Инжиниринг"</License>
+	</confOwner>
+</DocViewer>

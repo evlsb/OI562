@@ -1,0 +1,115 @@
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet type='text/xsl' href='MassDataHandlerLogFile.xsl'?>
+<LogFile titleName="al Log.xml" projectName="C:\Users\user\Desktop\hlam\al.xlsx" typeText="Type" messageText="Message" timeText="Time">
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 4 in column 'ID', row 6 is not unique. First usage in row 5.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 4 in column 'ID', row 7 is not unique. First usage in row 5.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 4 in column 'ID', row 8 is not unique. First usage in row 5.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 8 in column 'ID', row 13 is not unique. First usage in row 12.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 8 in column 'ID', row 14 is not unique. First usage in row 12.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 8 in column 'ID', row 15 is not unique. First usage in row 12.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 12 in column 'ID', row 20 is not unique. First usage in row 19.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 12 in column 'ID', row 21 is not unique. First usage in row 19.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 12 in column 'ID', row 22 is not unique. First usage in row 19.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 16 in column 'ID', row 27 is not unique. First usage in row 26.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 16 in column 'ID', row 28 is not unique. First usage in row 26.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 16 in column 'ID', row 29 is not unique. First usage in row 26.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 20 in column 'ID', row 34 is not unique. First usage in row 33.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 20 in column 'ID', row 35 is not unique. First usage in row 33.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 20 in column 'ID', row 36 is not unique. First usage in row 33.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 24 in column 'ID', row 41 is not unique. First usage in row 40.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 24 in column 'ID', row 42 is not unique. First usage in row 40.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 24 in column 'ID', row 43 is not unique. First usage in row 40.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 28 in column 'ID', row 48 is not unique. First usage in row 47.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 28 in column 'ID', row 49 is not unique. First usage in row 47.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 28 in column 'ID', row 50 is not unique. First usage in row 47.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 32 in column 'ID', row 55 is not unique. First usage in row 54.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 32 in column 'ID', row 56 is not unique. First usage in row 54.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 32 in column 'ID', row 57 is not unique. First usage in row 54.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 36 in column 'ID', row 62 is not unique. First usage in row 61.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 36 in column 'ID', row 63 is not unique. First usage in row 61.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 36 in column 'ID', row 64 is not unique. First usage in row 61.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 40 in column 'ID', row 69 is not unique. First usage in row 68.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 40 in column 'ID', row 70 is not unique. First usage in row 68.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 40 in column 'ID', row 71 is not unique. First usage in row 68.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 44 in column 'ID', row 76 is not unique. First usage in row 75.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 44 in column 'ID', row 77 is not unique. First usage in row 75.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 44 in column 'ID', row 78 is not unique. First usage in row 75.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 48 in column 'ID', row 83 is not unique. First usage in row 82.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 48 in column 'ID', row 84 is not unique. First usage in row 82.</Message>
+  </LogEntry>
+  <LogEntry type="Warning" dateTime="4:26:18 PM">
+    <Message>Alarm number 48 in column 'ID', row 85 is not unique. First usage in row 82.</Message>
+  </LogEntry>
+  <LogEntry type="Information" dateTime="4:26:18 PM">
+    <Message>Import finished: 84 discrete alarms; 0 analog alarms</Message>
+  </LogEntry>
+</LogFile>
