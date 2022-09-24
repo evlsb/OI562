@@ -13,7 +13,7 @@
 		<type>Month</type>
 		<template>template/measuring1.php</template>
 		<descr>Замер от {$row['dDateBegin']->format('d.m.y')} № {$row['id']}</descr>
-		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_time, 104), 104) as dDateBegin, id FROM Zamer Where (convert (datetime,date_time,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
+		<sql>SELECT Distinct convert (datetime, convert(varchar(10), date_time, 104), 104) as dDateBegin, id FROM Zamer_01 Where (convert (datetime,date_time,104) between {#dateb} and {#datee}) ORDER BY dDateBegin</sql>
 		<vars>itype=2</vars>
 	</list>
 

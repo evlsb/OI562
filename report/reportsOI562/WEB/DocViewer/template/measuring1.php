@@ -23,7 +23,7 @@
 
 	if( $conn ){  
 
-  		$tsql = "SELECT * FROM Zamer WHERE (date_time between '{#dateb}' and '{#datee}') ORDER BY date_time;";
+  		$tsql = "SELECT * FROM Zamer_01 WHERE (date_time between '{#dateb}' and '{#datee}') ORDER BY date_time;";
 
 
   		$tsql=str_replace("'{#dateb}'", $dateb, $tsql);
@@ -193,51 +193,51 @@
 				}  
 
 
-				$Dol_mech_prim_Read[$n]	 			= Convert_string($row["Dol_mech_prim_Read"]);				//Доля механических примесей
-				$Konc_hlor_sol_Read[$n]	 			= Convert_string($row["Konc_hlor_sol_Read"]);				//Концентрация хлористых солей
-				$Dol_ras_gaz_Read[$n]	 			= Convert_string($row["Dol_ras_gaz_Read"]);					//Доля растворенного газа
-				$vlaj_oil_Read[$n]		 			= Convert_string($row["vlaj_oil_Read"]);					//Влагосодержание
-				$Dol_ras_gaz_mass[$n]	 			= Convert_string($row["Dol_ras_gaz_mass"]);					//Доля растворенного газа
-				$Dens_gaz_KGN[$n]	 	 			= Convert_string($row["Dens_gaz_KGN"]);						//Плотность выделевшегося из КГН газа
+				$Dol_mech_prim_Read[$n]	 			= $row["Dol_mech_prim_Read"];				//Доля механических примесей
+				$Konc_hlor_sol_Read[$n]	 			= $row["Konc_hlor_sol_Read"];				//Концентрация хлористых солей
+				$Dol_ras_gaz_Read[$n]	 			= $row["Dol_ras_gaz_Read"];					//Доля растворенного газа
+				$vlaj_oil_Read[$n]		 			= $row["vlaj_oil_Read"];					//Влагосодержание
+				$Dol_ras_gaz_mass[$n]	 			= $row["Dol_ras_gaz_mass"];					//Доля растворенного газа
+				$Dens_gaz_KGN[$n]	 	 			= $row["Dens_gaz_KGN"];						//Плотность выделевшегося из КГН газа
 
 				
 
 				$Mass_brutto_Accum[$n]		 		= $row["Mass_brutto_Accum"];				//Накопленная масса брутто
 				$Mass_netto_Accum[$n]		 		= $row["Mass_netto_Accum"];					//Накопленная масса нетто
-				$Volume_Count_Forward_sc_Accum[$n]	= Convert_string($row["Volume_Count_Forward_sc_Accum"]);	//Накопленный объем газа в газовом трубопроводе
+				$Volume_Count_Forward_sc_Accum[$n]	= $row["Volume_Count_Forward_sc_Accum"];	//Накопленный объем газа в газовом трубопроводе
 				$Mg_GK[$n]		 					= $row["Mg_GK"];							//Накопленная масса газа в линии ГЖС
 				$Vg_GK[$n]		 					= $row["Vg_GK"];							//Накопленный объем газа в линии ГЖС
-				$Mass_Gaz_UVP_Accum[$n]		 		= Convert_string($row["Mass_Gaz_UVP_Accum"]);				//Масса газа, прошедшая через УИГ
-				$WC5_Accum[$n]		 				= Convert_string($row["WC5_Accum"]);						//Масса WC5+
-				$Mass_water_UIG_Accum[$n]		 	= Convert_string($row["Mass_water_UIG_Accum"]);				//Масса воды, прошедшя через УИГ
-				$Mass_KG[$n]		 				= Convert_string($row["Mass_KG"]);							//Масса КЖ, прошедшая через УИГ
-				$V_KG[$n]		 					= Convert_string($row["V_KG"]);								//Объем КЖ, прошедший через УИГ
+				$Mass_Gaz_UVP_Accum[$n]		 		= $row["Mass_Gaz_UVP_Accum"];				//Масса газа, прошедшая через УИГ
+				$WC5_Accum[$n]		 				= $row["WC5_Accum"];						//Масса WC5+
+				$Mass_water_UIG_Accum[$n]		 	= $row["Mass_water_UIG_Accum"];				//Масса воды, прошедшя через УИГ
+				$Mass_KG[$n]		 				= $row["Mass_KG"];							//Масса КЖ, прошедшая через УИГ
+				$V_KG[$n]		 					= $row["V_KG"];								//Объем КЖ, прошедший через УИГ
 
-				$Debit_liq[$n]		 				= Convert_string($row["Debit_liq"]);						//Дебит жидкости
-				$Debit_gas_in_liq[$n]		 		= Convert_string($row["Debit_gas_in_liq"]);					//Дебит раств.газа в  жидкости
-				$Debit_cond[$n]		 				= Convert_string($row["Debit_cond"]);						//Дебит конденсата
-				$Debit_water[$n]		 			= Convert_string($row["V_KG"]);								//Дебит воды
-				$Debit_gaz[$n]		 				= Convert_string($row["Debit_gaz"]);						//Дебит газа 
-				$Debit_KG[$n]		 				= Convert_string($row["Debit_KG"]);							//Дебит кап.жидкости в газе сепар.
+				$Debit_liq[$n]		 				= $row["Debit_liq"];						//Дебит жидкости
+				$Debit_gas_in_liq[$n]		 		= $row["Debit_gas_in_liq"];					//Дебит раств.газа в  жидкости
+				$Debit_cond[$n]		 				= $row["Debit_cond"];						//Дебит конденсата
+				$Debit_water[$n]		 			= $row["V_KG"];								//Дебит воды
+				$Debit_gaz[$n]		 				= $row["Debit_gaz"];						//Дебит газа 
+				$Debit_KG[$n]		 				= $row["Debit_KG"];							//Дебит кап.жидкости в газе сепар.
 
-				$Clean_Gaz[$n]		 				= Convert_string($row["Clean_Gaz"]);						//Дебит чистого газа 
-				$Clean_Cond[$n]		 				= Convert_string($row["Clean_Cond"]);						//Дебит чистого конденсата
-				$V_Water[$n]		 				= Convert_string($row["V_Water"]);							//Накопленная масса воды 
-				$V_Cond[$n]		 					= Convert_string($row["V_Cond"]);							//Накопленная масса чистого конд
-				$V_Gaz[$n]		 					= Convert_string($row["V_Gaz"]);							//Накопленный V чистого газа
+				$Clean_Gaz[$n]		 				= $row["Clean_Gaz"];						//Дебит чистого газа 
+				$Clean_Cond[$n]		 				= $row["Clean_Cond"];						//Дебит чистого конденсата
+				$V_Water[$n]		 				= $row["V_Water"];							//Накопленная масса воды 
+				$V_Cond[$n]		 					= $row["V_Cond"];							//Накопленная масса чистого конд
+				$V_Gaz[$n]		 					= $row["V_Gaz"];							//Накопленный V чистого газа
 
-				$TT100[$n]		 					= Convert_string($row["TT100"]);							
-				$PT100[$n]		 					= Convert_string($row["PT100"]);							
-				$PT201[$n]		 					= Convert_string($row["PT201"]);							
-				$PDT200[$n]		 					= Convert_string($row["PDT200"]);							
-				$PT202[$n]		 					= Convert_string($row["PT202"]);							
-				$PT300[$n]		 					= Convert_string($row["PT300"]);							
-				$LT300[$n]		 					= Convert_string($row["LT300"]);							
-				$TT300[$n]		 					= Convert_string($row["TT300"]);							
-				$TT500[$n]		 					= Convert_string($row["TT500"]);							
-				$PT500[$n]		 					= Convert_string($row["PT500"]);	
-				$TT700[$n]		 					= Convert_string($row["TT700"]);
-				$PT700[$n]		 					= Convert_string($row["PT700"]);	
+				$TT100[$n]		 					= $row["TT100"];							
+				$PT100[$n]		 					= $row["PT100"];							
+				$PT201[$n]		 					= $row["PT201"];							
+				$PDT200[$n]		 					= $row["PDT200"];							
+				$PT202[$n]		 					= $row["PT202"];							
+				$PT300[$n]		 					= $row["PT300"];							
+				$LT300[$n]		 					= $row["LT300"];							
+				$TT300[$n]		 					= $row["TT300"];							
+				$TT500[$n]		 					= $row["TT500"];							
+				$PT500[$n]		 					= $row["PT500"];	
+				$TT700[$n]		 					= $row["TT700"];
+				$PT700[$n]		 					= $row["PT700"];	
 
 				$FS_P[$n]		 					= Convert_string($row["FS_P"]);					//Давление в линии газа		
 				$FS_T[$n]		 					= Convert_string($row["FS_T"]);					//Температура в линии газа
@@ -259,7 +259,9 @@
 
   	}
 
-
+//echo(FormatEx((real)$Vg_GK[0], 3, $NULL));
+  	//echo FormatEx($WC5_Accum[0], 7, $NULL);
+  	//echo $Mg_GK[0];
 ?>
 
 
@@ -339,12 +341,12 @@
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $Dol_mech_prim_Read[$nn] . '</TD>';	//Доля механических примесей
-						echo '<TD style="border-bottom:none;border-right:none">' . $Konc_hlor_sol_Read[$nn] . '</TD>';	//Концентрация хлористых солей
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Dol_mech_prim_Read[$nn], 3, $NULL) . '</TD>';	//Доля механических примесей
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Konc_hlor_sol_Read[$nn], 3, $NULL) . '</TD>';	//Концентрация хлористых солей
 						//echo '<TD style="border-bottom:none;border-right:none">' . $Dol_ras_gaz_Read[$nn] . '</TD>';	//Доля растворенного газа
-						echo '<TD style="border-bottom:none;border-right:none">' . $vlaj_oil_Read[$nn] . '</TD>';		//Влагосодержание
-						echo '<TD style="border-bottom:none;border-right:none">' . $Dol_ras_gaz_mass[$nn] . '</TD>';	//Доля растворенного газа
-						echo '<TD style="border-bottom:none;border-right:none">' . $Dens_gaz_KGN[$nn] . '</TD>';		//Плотность выделевшегося из КГН газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($vlaj_oil_Read[$nn], 3, $NULL) . '</TD>';		//Влагосодержание
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Dol_ras_gaz_mass[$nn], 3, $NULL) . '</TD>';	//Доля растворенного газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Dens_gaz_KGN[$nn], 3, $NULL) . '</TD>';		//Плотность выделевшегося из КГН газа
 					echo '</TR>'  ;
 				}
 
@@ -415,18 +417,18 @@
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD id="Mass_brutto_Accum" style="border-bottom:none;border-right:none">' . number_format((real)($Mass_brutto_Accum[$nn]), 3, '.', ' ') . '</TD>';//Накопленная масса брутто
-						echo '<TD style="border-bottom:none;border-right:none">' . (real)($Mass_netto_Accum[$nn]) . '</TD>';//Накопленная масса нетто
-						echo '<TD style="border-bottom:none;border-right:none">' . $V_Water[$nn] . '</TD>';//Накопленная масса воды
-						echo '<TD style="border-bottom:none;border-right:none">' . $V_Cond[$nn] . '</TD>';//Накопленная масса чистого конд
-						echo '<TD id="Volume_Count_Forward_sc_Accum" style="border-bottom:none;border-right:none">' . $Volume_Count_Forward_sc_Accum[$nn] . '</TD>';//Накопл.объем газа в УИГ
-						echo '<TD style="border-bottom:none;border-right:none">' . $V_Gaz[$nn] . '</TD>';//Накопленный V чистого газа
-						echo '<TD style="border-bottom:none;border-right:none">' . $Mg_GK[$nn] . '</TD>';//Накопленная масса газа в линии ГЖС
-						echo '<TD style="border-bottom:none;border-right:none">' . $Vg_GK[$nn] . '</TD>';//Накопленный объем газа в линии ГЖС
-						echo '<TD id="Mass_Gaz_UVP_Accum" style="border-bottom:none;border-right:none">' . $Mass_Gaz_UVP_Accum[$nn] . '</TD>';//Масса газа, прошедшая через УИГ
-						echo '<TD style="border-bottom:none;border-right:none">' . $WC5_Accum[$nn] . '</TD>';//Масса WC5+
-						echo '<TD style="border-bottom:none;border-right:none">' . $Mass_water_UIG_Accum[$nn] . '</TD>';//Масса воды, прошедшя через УИГ
-						echo '<TD style="border-bottom:none;border-right:none">' . $Mass_KG[$nn] . '</TD>';//Масса КЖ, прошедшая через УИГ
+						echo '<TD id="Mass_brutto_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Mass_brutto_Accum[$nn], 3, $NULL) . '</TD>';//Накопленная масса брутто
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_netto_Accum[$nn], 3, $NULL) . '</TD>';//Накопленная масса нетто
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Water[$nn], 3, $NULL) . '</TD>';//Накопленная масса воды
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Cond[$nn], 3, $NULL) . '</TD>';//Накопленная масса чистого конд
+						echo '<TD id="Volume_Count_Forward_sc_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Volume_Count_Forward_sc_Accum[$nn], 3, $NULL) . '</TD>';//Накопл.объем газа в УИГ
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Gaz[$nn], 3, $NULL) . '</TD>';//Накопленный V чистого газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mg_GK[$nn], 3, $NULL) . '</TD>';//Накопленная масса газа в линии ГЖС
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Vg_GK[$nn], 3, $NULL) . '</TD>';//Накопленный объем газа в линии ГЖС
+						echo '<TD id="Mass_Gaz_UVP_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Mass_Gaz_UVP_Accum[$nn], 3, $NULL) . '</TD>';//Масса газа, прошедшая через УИГ
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($WC5_Accum[$nn], 3, $NULL) . '</TD>';//Масса WC5+
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_water_UIG_Accum[$nn], 3, $NULL) . '</TD>';//Масса воды, прошедшя через УИГ
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_KG[$nn], 3, $NULL) . '</TD>';//Масса КЖ, прошедшая через УИГ
 						//echo '<TD style="border-bottom:none;border-right:none">' . $V_KG[$nn] . '</TD>';//Объем КЖ, прошедший через УИГ
 
 					echo '</TR>'  ;
@@ -476,22 +478,22 @@
 		</TR>
 
 		<?php
-				$p1 = (float) $Mg_GK[0];
-				echo $p1;
+				//$p1 = (float) $Mg_GK[0];
+				//echo $p1;
 
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $Debit_liq[$nn] . '</TD>';//Дебит жидкости
-						echo '<TD style="border-bottom:none;border-right:none">' . Convert_string($Debit_cond[$nn]) . '</TD>';//Дебит конденсата
-						echo '<TD style="border-bottom:none;border-right:none">' . $Debit_water[$nn] . '</TD>';//Дебит воды
-						echo '<TD style="border-bottom:none;border-right:none">' . $Clean_Cond[$nn] . '</TD>';//Дебит чистого конденсата
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_liq[$nn], 3, $NULL) . '</TD>';//Дебит жидкости
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_cond[$nn], 3, $NULL) . '</TD>';//Дебит конденсата
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_water[$nn], 3, $NULL) . '</TD>';//Дебит воды
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Clean_Cond[$nn], 3, $NULL) . '</TD>';//Дебит чистого конденсата
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $Debit_KG[$nn] . '</TD>';//Дебит кап.жидкости в газе сепар.
-						echo '<TD style="border-bottom:none;border-right:none">' . $Debit_gaz[$nn] . '</TD>';//Дебит газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_KG[$nn], 3, $NULL) . '</TD>';//Дебит кап.жидкости в газе сепар.
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_gaz[$nn], 3, $NULL) . '</TD>';//Дебит газа
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $Debit_gas_in_liq[$nn] . '</TD>';//Дебит раств.газа в  жидкости
-						echo '<TD style="border-bottom:none;border-right:none">' . $Clean_Gaz[$nn] . '</TD>';//Дебит чистого газа			
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_gas_in_liq[$nn], 3, $NULL) . '</TD>';//Дебит раств.газа в  жидкости
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Clean_Gaz[$nn], 3, $NULL) . '</TD>';//Дебит чистого газа			
 
 					echo '</TR>'  ;
 				}
@@ -537,12 +539,12 @@
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $TT100[$nn] . '</TD>';	//Температура во входном коллекторе
-						echo '<TD style="border-bottom:none;border-right:none">' . $PT100[$nn] . '</TD>';	//Давление во входном коллекторе
-						echo '<TD style="border-bottom:none;border-right:none">' . $PT201[$nn] . '</TD>';	//Давление на всасе Н-1
-						echo '<TD style="border-bottom:none;border-right:none">' . $PDT200[$nn] . '</TD>';	//Перепад давления на фильтре
-						echo '<TD style="border-bottom:none;border-right:none">' . $PT202[$nn] . '</TD>';	//Давление на выкиде Н-1
-						echo '<TD style="border-bottom:none;border-right:none">' . $PT300[$nn] . '</TD>';	//Давление в газосепараторе ГС-1
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($TT100[$nn], 2, $NULL) . '</TD>';	//Температура во входном коллекторе
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($PT100[$nn], 3, $NULL) . '</TD>';	//Давление во входном коллекторе
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($PT201[$nn], 3, $NULL) . '</TD>';	//Давление на всасе Н-1
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($PDT200[$nn], 3, $NULL) . '</TD>';	//Перепад давления на фильтре
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($PT202[$nn], 3, $NULL) . '</TD>';	//Давление на выкиде Н-1
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($PT300[$nn], 3, $NULL) . '</TD>';	//Давление в газосепараторе ГС-1
 
 					echo '</TR>'  ;
 				}
@@ -571,12 +573,12 @@
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $LT300[$nn] . '</TD>';	//Уровень в емкости Е-1
-						echo '<TD style="border-bottom:none;border-right:none">' . $TT300[$nn] . '</TD>';	//Темп в емкости Е-1
-						echo '<TD style="border-bottom:none;border-right:none">' . $TT500[$nn] . '</TD>';	//Темп в вых. коллек жидк
-						echo '<TD style="border-bottom:none;border-right:none">' . $PT500[$nn] . '</TD>';	//Давл в вых. коллек жидк
-						echo '<TD style="border-bottom:none;border-right:none">' . $TT700[$nn] . '</TD>';	//Темп в вых. коллек газа
-						echo '<TD style="border-bottom:none;border-right:none">' . $PT700[$nn] . '</TD>';	//Давл в вых. коллек газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($LT300[$nn], 3, $NULL) . '</TD>';	//Уровень в емкости Е-1
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($TT300[$nn], 2, $NULL) . '</TD>';	//Темп в емкости Е-1
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($TT500[$nn], 2, $NULL) . '</TD>';	//Темп в вых. коллек жидк
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($PT500[$nn], 3, $NULL) . '</TD>';	//Давл в вых. коллек жидк
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($TT700[$nn], 3, $NULL) . '</TD>';	//Темп в вых. коллек газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($PT700[$nn], 3, $NULL) . '</TD>';	//Давл в вых. коллек газа
 
 					echo '</TR>'  ;
 				}
@@ -613,10 +615,10 @@
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $FS_P[$nn] . '</TD>';	//Давление в линии газа
-						echo '<TD style="border-bottom:none;border-right:none">' . $FS_T[$nn] . '</TD>';	//Температура в линии газа
-						echo '<TD style="border-bottom:none;border-right:none">' . $FS_Qw[$nn] . '</TD>';	//Дебит газа FLOWSIC
-						echo '<TD style="border-bottom:none;border-right:none">' . $FS_Qs[$nn] . '</TD>';	//Дебит газа FLOWSIC
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($FS_P[$nn], 3, $NULL) . '</TD>';	//Давление в линии газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($FS_T[$nn], 2, $NULL) . '</TD>';	//Температура в линии газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($FS_Qw[$nn], 3, $NULL) . '</TD>';	//Дебит газа FLOWSIC
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($FS_Qs[$nn], 3, $NULL) . '</TD>';	//Дебит газа FLOWSIC
 
 					echo '</TR>'  ;
 				}
@@ -652,10 +654,10 @@
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD style="border-bottom:none;border-right:none">' . $Debit_liq[$nn] . '</TD>';			//Дебит жидкости ROTAMASS
-						echo '<TD style="border-bottom:none;border-right:none">' . $Mass_brutto_Accum[$nn] . '</TD>';	//Масса жидкости ROTAMASS
-						echo '<TD style="border-bottom:none;border-right:none">' . $RT_Dens[$nn] . '</TD>';				//Плотность жидкости ROTAMASS
-						echo '<TD style="border-bottom:none;border-right:none">' . $RT_Vlaj[$nn] . '</TD>';				//Обводнённость влагомер
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_liq[$nn], 3, $NULL) . '</TD>';			//Дебит жидкости ROTAMASS
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_brutto_Accum[$nn], 3, $NULL) . '</TD>';	//Масса жидкости ROTAMASS
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($RT_Dens[$nn], 3, $NULL) . '</TD>';				//Плотность жидкости ROTAMASS
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($RT_Vlaj[$nn], 3, $NULL) . '</TD>';				//Обводнённость влагомер
 
 					echo '</TR>'  ;
 				}
@@ -689,8 +691,8 @@
 
 
 
-						echo '<TD style="border-bottom:none;border-right:none">' . round($Wv_After[$nn], 2) . '</TD>';	
-						echo '<TD style="border-bottom:none;border-right:none">' . round($Wm_After[$nn], 2) . '</TD>';	
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Wv_After[$nn], 3, $NULL) . '</TD>';	
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Wm_After[$nn], 3, $NULL) . '</TD>';	
 
 					echo '</TR>'  ;
 				}

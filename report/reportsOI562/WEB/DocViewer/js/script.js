@@ -1016,6 +1016,8 @@ function show_html(descr1)
    var OWNER       = rw_XML_row(xmlDoc, "Owner");       // получение Владелеца СИКН
    var myForm      = document.getElementById('txtHTML'); // блок  txtHTML
 
+   //alert(html);
+
    var dateb, datee, dateb_get, datee_get, docdate, docdates;
 
    dateb = get_date_to_type(type,"b");  // получаем начальную дату
