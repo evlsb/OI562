@@ -138,7 +138,7 @@
 
 
 
-	$tsql = "SELECT * FROM Zamer WHERE ((date_time between date_b and date_e) field bush well) ORDER BY date_time asc;";
+	$tsql = "SELECT * FROM Zamer_01 WHERE ((date_time between date_b and date_e) field bush well) ORDER BY date_time asc;";
 
 
 	$tsql=str_replace("date_b", "'".$date_b."'", $tsql);
@@ -239,60 +239,60 @@
 			$date_time2[$n] 					= $row["date_time2"];
 			$Bush[$n] 							= $row["Bush"];
 			$Well[$n] 							= $row["Well"];
-			$Time_m[$n] 						= Convert_string($row["Time_m"]);
-			$Rejim[$n] 							= Convert_string($row["Rejim"]);
-			$Method_obv[$n] 					= Convert_string($row["Method_obv"]);
+			$Time_m[$n] 						= $row["Time_m"];
+			$Rejim[$n] 							= $row["Rejim"];
+			$Method_obv[$n] 					= $row["Method_obv"];
 
-			$Dol_mech_prim_Read[$n] 			= Convert_string($row["Dol_mech_prim_Read"]);
-			$Konc_hlor_sol_Read[$n] 			= Convert_string($row["Konc_hlor_sol_Read"]);
-			$Dol_ras_gaz_Read[$n] 				= Convert_string($row["Dol_ras_gaz_Read"]);
-			$vlaj_oil_Read[$n] 					= Convert_string($row["vlaj_oil_Read"]);
-			$Dol_ras_gaz_mass[$n] 				= Convert_string($row["Dol_ras_gaz_mass"]);
-			$Dens_gaz_KGN[$n] 					= Convert_string($row["Dens_gaz_KGN"]);
+			$Dol_mech_prim_Read[$n] 			= $row["Dol_mech_prim_Read"];
+			$Konc_hlor_sol_Read[$n] 			= $row["Konc_hlor_sol_Read"];
+			$Dol_ras_gaz_Read[$n] 				= $row["Dol_ras_gaz_Read"];
+			$vlaj_oil_Read[$n] 					= $row["vlaj_oil_Read"];
+			$Dol_ras_gaz_mass[$n] 				= $row["Dol_ras_gaz_mass"];
+			$Dens_gaz_KGN[$n] 					= $row["Dens_gaz_KGN"];
 
-			$Mass_brutto_Accum[$n] 				= Convert_string($row["Mass_brutto_Accum"]);
-			$Mass_netto_Accum[$n] 				= Convert_string($row["Mass_netto_Accum"]);
-			$Volume_Count_Forward_sc_Accum[$n] 	= Convert_string($row["Volume_Count_Forward_sc_Accum"]);
-			$Mg_GK[$n] 							= Convert_string($row["Mg_GK"]);
-			$Vg_GK[$n] 							= Convert_string($row["Vg_GK"]);
-			$Mass_Gaz_UVP_Accum[$n] 			= Convert_string($row["Mass_Gaz_UVP_Accum"]);
-			$WC5_Accum[$n] 						= Convert_string($row["WC5_Accum"]);
-			$Mass_water_UIG_Accum[$n] 			= Convert_string($row["Mass_water_UIG_Accum"]);
-			$Mass_KG[$n] 						= Convert_string($row["Mass_KG"]);
-			$V_KG[$n] 							= Convert_string($row["V_KG"]);
+			$Mass_brutto_Accum[$n] 				= $row["Mass_brutto_Accum"];
+			$Mass_netto_Accum[$n] 				= $row["Mass_netto_Accum"];
+			$Volume_Count_Forward_sc_Accum[$n] 	= $row["Volume_Count_Forward_sc_Accum"];
+			$Mg_GK[$n] 							= $row["Mg_GK"];
+			$Vg_GK[$n] 							= $row["Vg_GK"];
+			$Mass_Gaz_UVP_Accum[$n] 			= $row["Mass_Gaz_UVP_Accum"];
+			$WC5_Accum[$n] 						= $row["WC5_Accum"];
+			$Mass_water_UIG_Accum[$n] 			= $row["Mass_water_UIG_Accum"];
+			$Mass_KG[$n] 						= $row["Mass_KG"];
+			$V_KG[$n] 							= $row["V_KG"];
 
-			$Debit_liq[$n] 						= Convert_string($row["Debit_liq"]);
-			$Debit_gas_in_liq[$n] 				= Convert_string($row["Debit_gas_in_liq"]);
-			$Debit_cond[$n] 					= Convert_string($row["Debit_cond"]);
-			$Debit_gaz[$n] 						= Convert_string($row["Debit_gaz"]);
-			$Debit_KG[$n] 						= Convert_string($row["Debit_KG"]);
-			$Debit_water[$n] 					= Convert_string($row["Debit_water"]);
-			$Clean_Gaz[$n] 						= Convert_string($row["Clean_Gaz"]);
-			$Clean_Cond[$n] 					= Convert_string($row["Clean_Cond"]);
-			$V_Gaz[$n] 							= Convert_string($row["V_Gaz"]);
-			$V_Cond[$n] 						= Convert_string($row["V_Cond"]);
-			$V_Water[$n] 						= Convert_string($row["V_Water"]);
-			$av[$n] 							= Convert_string($row["av"]);
+			$Debit_liq[$n] 						= $row["Debit_liq"];
+			$Debit_gas_in_liq[$n] 				= $row["Debit_gas_in_liq"];
+			$Debit_cond[$n] 					= $row["Debit_cond"];
+			$Debit_gaz[$n] 						= $row["Debit_gaz"];
+			$Debit_KG[$n] 						= $row["Debit_KG"];
+			$Debit_water[$n] 					= $row["V_KG"];
+			$Clean_Gaz[$n] 						= $row["Clean_Gaz"];
+			$Clean_Cond[$n] 					= $row["Clean_Cond"];
+			$V_Gaz[$n] 							= $row["V_Gaz"];
+			$V_Cond[$n] 						= $row["V_Cond"];
+			$V_Water[$n] 						= $row["V_Water"];
+			$av[$n] 							= $row["av"];
 
-			$TT100[$n] 							= Convert_string($row["TT100"]);
-			$PT100[$n] 							= Convert_string($row["PT100"]);
-			$PT201[$n] 							= Convert_string($row["PT201"]);
-			$PDT200[$n] 						= Convert_string($row["PDT200"]);
-			$PT202[$n] 							= Convert_string($row["PT202"]);
-			$PT300[$n] 							= Convert_string($row["PT300"]);
-			$LT300[$n] 							= Convert_string($row["LT300"]);
-			$TT300[$n] 							= Convert_string($row["TT300"]);
-			$TT500[$n] 							= Convert_string($row["TT500"]);
-			$PT500[$n] 							= Convert_string($row["PT500"]);
-			$TT700[$n] 							= Convert_string($row["TT700"]);
-			$PT700[$n] 							= Convert_string($row["PT700"]);
+			$TT100[$n] 							= $row["TT100"];
+			$PT100[$n] 							= $row["PT100"];
+			$PT201[$n] 							= $row["PT201"];
+			$PDT200[$n] 						= $row["PDT200"];
+			$PT202[$n] 							= $row["PT202"];
+			$PT300[$n] 							= $row["PT300"];
+			$LT300[$n] 							= $row["LT300"];
+			$TT300[$n] 							= $row["TT300"];
+			$TT500[$n] 							= $row["TT500"];
+			$PT500[$n] 							= $row["PT500"];
+			$TT700[$n] 							= $row["TT700"];
+			$PT700[$n] 							= $row["PT700"];
 
-			$FS_P[$n] 							= Convert_string($row["FS_P"]);
-			$FS_T[$n] 							= Convert_string($row["FS_T"]);
-			$FS_Qw[$n] 							= Convert_string($row["FS_Qw"]);
-			$FS_Qs[$n] 							= Convert_string($row["FS_Qs"]);
-			$RT_Dens[$n] 						= Convert_string($row["RT_Dens"]);
-			$RT_Vlaj[$n] 						= Convert_string($row["RT_Vlaj"]);
+			$FS_P[$n] 							= $row["FS_P"];
+			$FS_T[$n] 							= $row["FS_T"];
+			$FS_Qw[$n] 							= $row["FS_Qw"];
+			$FS_Qs[$n] 							= $row["FS_Qs"];
+			$RT_Dens[$n] 						= $row["RT_Dens"];
+			$RT_Vlaj[$n] 						= $row["RT_Vlaj"];
 
 
 			$n = $n + 1;
@@ -586,57 +586,57 @@
 					//$sheet->setCellValue("H".$num_str, $Rejim[$nn]);									//Режим
 					//$sheet->setCellValue("I".$num_str, $Method[$nn]);									//Метод
 
-					$sheet->setCellValue("J".$num_str, $Dol_mech_prim_Read[$nn]);						//Доля механических примесей
-					$sheet->setCellValue("K".$num_str, $Konc_hlor_sol_Read[$nn]);						//Концентрация хлористых солей
-					$sheet->setCellValue("L".$num_str, $vlaj_oil_Read[$nn]);							//Влагосодержание
-					$sheet->setCellValue("M".$num_str, $Dol_ras_gaz_mass[$nn]);							//Доля растворенного газа
-					$sheet->setCellValue("N".$num_str, $Dens_gaz_KGN[$nn]);								//Плотность выделевшегося из КГН газа
+					$sheet->setCellValue("J".$num_str, FormatEx($Dol_mech_prim_Read[$nn], 3, $NULL));						//Доля механических примесей
+					$sheet->setCellValue("K".$num_str, FormatEx($Konc_hlor_sol_Read[$nn], 3, $NULL));						//Концентрация хлористых солей
+					$sheet->setCellValue("L".$num_str, FormatEx($vlaj_oil_Read[$nn], 2, $NULL));							//Влагосодержание
+					$sheet->setCellValue("M".$num_str, FormatEx($Dol_ras_gaz_mass[$nn], 3, $NULL));							//Доля растворенного газа
+					$sheet->setCellValue("N".$num_str, FormatEx($Dens_gaz_KGN[$nn], 3, $NULL));								//Плотность выделевшегося из КГН газа
 
-					$sheet->setCellValue("O".$num_str, $Mass_brutto_Accum[$nn]);	//Накопленная масса брутто
-					$sheet->setCellValue("P".$num_str, $Mass_netto_Accum[$nn]);		//Накопленная масса нетто
-					$sheet->setCellValue("Q".$num_str, $V_Water[$nn]);				//Накопленная масса воды
-					$sheet->setCellValue("R".$num_str, $V_Cond[$nn]);	//Накопленная масса чистого конд
-					$sheet->setCellValue("S".$num_str, $Volume_Count_Forward_sc_Accum[$nn]);//Накопленный объем газа в УИГ
-					$sheet->setCellValue("T".$num_str, $V_Gaz[$nn]);	//Накопленный V чистого газа
-					$sheet->setCellValue("U".$num_str, $Mg_GK[$nn]);		//Накопленная масса газа в линии ГЖС
-					$sheet->setCellValue("V".$num_str, $Vg_GK[$nn]);		//Накопленный объем газа в линии ГЖС
-					$sheet->setCellValue("W".$num_str, ($Mass_Gaz_UVP_Accum[$nn])/1000);	//Масса газа, прошедшая через УИГ
-					$sheet->setCellValue("X".$num_str, ($WC5_Accum[$nn])/1000);			//Масса WC5+
-					$sheet->setCellValue("Y".$num_str, ($Mass_water_UIG_Accum[$nn])/100);	//Масса воды, прошедшя через УИГ
-					$sheet->setCellValue("Z".$num_str, ($Mass_KG[$nn])/1000);			//Масса КЖ, прошедшая через УИГ
+					$sheet->setCellValue("O".$num_str, FormatEx($Mass_brutto_Accum[$nn], 7, $NULL));	//Накопленная масса брутто
+					$sheet->setCellValue("P".$num_str, FormatEx($Mass_netto_Accum[$nn], 7, $NULL));		//Накопленная масса нетто
+					$sheet->setCellValue("Q".$num_str, FormatEx($V_Water[$nn], 7, $NULL));				//Накопленная масса воды
+					$sheet->setCellValue("R".$num_str, FormatEx($V_Cond[$nn], 3, $NULL));	//Накопленная масса чистого конд
+					$sheet->setCellValue("S".$num_str, FormatEx($Volume_Count_Forward_sc_Accum[$nn], 3, $NULL));//Накопленный объем газа в УИГ
+					$sheet->setCellValue("T".$num_str, FormatEx($V_Gaz[$nn], 3, $NULL));	//Накопленный V чистого газа
+					$sheet->setCellValue("U".$num_str, FormatEx($Mg_GK[$nn], 6, $NULL));		//Накопленная масса газа в линии ГЖС
+					$sheet->setCellValue("V".$num_str, FormatEx($Vg_GK[$nn], 6, $NULL));		//Накопленный объем газа в линии ГЖС
+					$sheet->setCellValue("W".$num_str, FormatEx((($Mass_Gaz_UVP_Accum[$nn])/1000), 3, $NULL));	//Масса газа, прошедшая через УИГ
+					$sheet->setCellValue("X".$num_str, FormatEx((($WC5_Accum[$nn])/1000), 3, $NULL));			//Масса WC5+
+					$sheet->setCellValue("Y".$num_str, FormatEx((($Mass_water_UIG_Accum[$nn])/100), 3, $NULL));	//Масса воды, прошедшя через УИГ
+					$sheet->setCellValue("Z".$num_str, FormatEx((($Mass_KG[$nn])/1000), 3, $NULL));			//Масса КЖ, прошедшая через УИГ
 					
 
-					$sheet->setCellValue("AA".$num_str, $Debit_liq[$nn]);	//Дебит жидкости
-					$sheet->setCellValue("AB".$num_str, $Debit_cond[$nn]);	//Дебит конденсата
-					$sheet->setCellValue("AC".$num_str, $Debit_water[$nn]);	//Дебит воды
-					$sheet->setCellValue("AD".$num_str, $Clean_Cond[$nn]);	//Суммарный дебит конденсата
-					$sheet->setCellValue("AE".$num_str, $Debit_KG[$nn]);	//Дебит кап.жидкости в газе сепар.
-					$sheet->setCellValue("AF".$num_str, $Debit_gaz[$nn]);	//Дебит газа
-					$sheet->setCellValue("AG".$num_str, $Debit_gas_in_liq[$nn]);	//Дебит раств.газа в  жидкости
-					$sheet->setCellValue("AH".$num_str, $Clean_Gaz[$nn]);	//Суммарный дебит газа (расчет)
+					$sheet->setCellValue("AA".$num_str, FormatEx($Debit_liq[$nn], 3, $NULL));	//Дебит жидкости
+					$sheet->setCellValue("AB".$num_str, FormatEx($Debit_cond[$nn], 3, $NULL));	//Дебит конденсата
+					$sheet->setCellValue("AC".$num_str, FormatEx($Debit_water[$nn], 3, $NULL));	//Дебит воды
+					$sheet->setCellValue("AD".$num_str, FormatEx($Clean_Cond[$nn], 3, $NULL));	//Суммарный дебит конденсата
+					$sheet->setCellValue("AE".$num_str, FormatEx($Debit_KG[$nn], 3, $NULL));	//Дебит кап.жидкости в газе сепар.
+					$sheet->setCellValue("AF".$num_str, FormatEx($Debit_gaz[$nn], 3, $NULL));	//Дебит газа
+					$sheet->setCellValue("AG".$num_str, FormatEx($Debit_gas_in_liq[$nn], 3, $NULL));	//Дебит раств.газа в  жидкости
+					$sheet->setCellValue("AH".$num_str, FormatEx($Clean_Gaz[$nn], 3, $NULL));	//Суммарный дебит газа (расчет)
 					
-					$sheet->setCellValue("AI".$num_str, $TT100[$nn]);									//Температура во входном коллекторе
-					$sheet->setCellValue("AJ".$num_str, $PT100[$nn]);									//Давление во входном коллекторе
-					$sheet->setCellValue("AK".$num_str, $PT201[$nn]);									//Давление на всасе Н-1
-					$sheet->setCellValue("AL".$num_str, $PDT200[$nn]);									//Перепад давления на фильтре
-					$sheet->setCellValue("AM".$num_str, $PT202[$nn]);									//Давление на выкиде Н-1
-					$sheet->setCellValue("AN".$num_str, $PT300[$nn]);									//Давление в газосепараторе ГС-1
-					$sheet->setCellValue("AO".$num_str, $LT300[$nn]);									//Уровень в емкости Е-1
-					$sheet->setCellValue("AP".$num_str, $TT300[$nn]);									//Темп в емкости Е-1
-					$sheet->setCellValue("AQ".$num_str, $TT500[$nn]);									//Темп в вых. коллек жидк
-					$sheet->setCellValue("AR".$num_str, $PT500[$nn]);									//Давл в вых. коллек жидк
-					$sheet->setCellValue("AS".$num_str, $TT700[$nn]);									//Темп в вых. коллек газа
-					$sheet->setCellValue("AT".$num_str, $PT700[$nn]);									//Давл в вых. коллек газа
+					$sheet->setCellValue("AI".$num_str, FormatEx($TT100[$nn], 2, $NULL));									//Температура во входном коллекторе
+					$sheet->setCellValue("AJ".$num_str, FormatEx($PT100[$nn], 3, $NULL));									//Давление во входном коллекторе
+					$sheet->setCellValue("AK".$num_str, FormatEx($PT201[$nn], 3, $NULL));									//Давление на всасе Н-1
+					$sheet->setCellValue("AL".$num_str, FormatEx($PDT200[$nn], 3, $NULL));									//Перепад давления на фильтре
+					$sheet->setCellValue("AM".$num_str, FormatEx($PT202[$nn], 3, $NULL));									//Давление на выкиде Н-1
+					$sheet->setCellValue("AN".$num_str, FormatEx($PT300[$nn], 3, $NULL));									//Давление в газосепараторе ГС-1
+					$sheet->setCellValue("AO".$num_str, FormatEx($LT300[$nn], 2, $NULL));									//Уровень в емкости Е-1
+					$sheet->setCellValue("AP".$num_str, FormatEx($TT300[$nn], 2, $NULL));									//Темп в емкости Е-1
+					$sheet->setCellValue("AQ".$num_str, FormatEx($TT500[$nn], 2, $NULL));									//Темп в вых. коллек жидк
+					$sheet->setCellValue("AR".$num_str, FormatEx($PT500[$nn], 3, $NULL));									//Давл в вых. коллек жидк
+					$sheet->setCellValue("AS".$num_str, FormatEx($TT700[$nn], 2, $NULL));									//Темп в вых. коллек газа
+					$sheet->setCellValue("AT".$num_str, FormatEx($PT700[$nn], 3, $NULL));									//Давл в вых. коллек газа
 
-					$sheet->setCellValue("AU".$num_str, $FS_P[$nn]);									//Давление в линии газа
-					$sheet->setCellValue("AV".$num_str, $FS_T[$nn]);									//Температура в линии газа
-					$sheet->setCellValue("AW".$num_str, $FS_Qw[$nn]);									//Дебит газа FLOWSIC
-					$sheet->setCellValue("AX".$num_str, $FS_Qs[$nn]);									//Дебит газа FLOWSIC
+					$sheet->setCellValue("AU".$num_str, FormatEx($FS_P[$nn], 3, $NULL));									//Давление в линии газа
+					$sheet->setCellValue("AV".$num_str, FormatEx($FS_T[$nn], 2, $NULL));									//Температура в линии газа
+					$sheet->setCellValue("AW".$num_str, FormatEx($FS_Qw[$nn], 3, $NULL));									//Дебит газа FLOWSIC
+					$sheet->setCellValue("AX".$num_str, FormatEx($FS_Qs[$nn], 3, $NULL));									//Дебит газа FLOWSIC
 					//
-					$sheet->setCellValue("AY".$num_str, $Debit_liq[$nn]);	        //Дебит жидкости
-					$sheet->setCellValue("AZ".$num_str, $Mass_brutto_Accum[$nn]);	//Накопленная масса брутто
-					$sheet->setCellValue("BA".$num_str, $RT_Dens[$nn]);				//Плотность жидкости ROTAMASS
-					$sheet->setCellValue("BB".$num_str, $RT_Vlaj[$nn]);				//Обводнённость влагомер
+					$sheet->setCellValue("AY".$num_str, FormatEx($Debit_liq[$nn], 3, $NULL));	        //Дебит жидкости
+					$sheet->setCellValue("AZ".$num_str, FormatEx($Mass_brutto_Accum[$nn], 3, $NULL));	//Накопленная масса брутто
+					$sheet->setCellValue("BA".$num_str, FormatEx($RT_Dens[$nn], 3, $NULL));				//Плотность жидкости ROTAMASS
+					$sheet->setCellValue("BB".$num_str, FormatEx($RT_Vlaj[$nn], 3, $NULL));				//Обводнённость влагомер
 
 
 

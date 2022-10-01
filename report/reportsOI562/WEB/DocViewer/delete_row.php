@@ -45,7 +45,7 @@
 
 	if( $conn ){
 
-		$tsql = "DELETE FROM Zamer WHERE id = $id;";
+		$tsql = "DELETE FROM Zamer_01 WHERE id = $id;";
 		$stmt = sqlsrv_query($conn, $tsql);
 
 	}
