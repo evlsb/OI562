@@ -68,6 +68,7 @@
 
 		$Debit_liq						= array();
 		$Debit_gas_in_liq				= array();
+		$Debit_V_gas_in_liq				= array();
 		$Debit_cond						= array();
 		$Debit_water					= array();
 		$Debit_gaz						= array();
@@ -101,6 +102,18 @@
 
 		$Wm_After						= array();
 		$Wv_After						= array();
+
+		//Блок параметров по скважине, вводимых оператором
+		$OW_M_GD						= array();
+		$OW_Dens_GD						= array();
+		$OW_V_PO						= array();
+		$OW_m_ZO						= array();
+		$OW_Dens_SK						= array();
+		$OW_m_PROB						= array();
+
+		//Расчет из данных "блока параметров по скважине, вводимых оператором"
+		$OR_m_RG						= array();
+		$OR_W_RG						= array();
 
 		$n = 0;
 
@@ -167,10 +180,11 @@
 			$tdescr=str_replace("id", $id1, $tdescr);	
 
 			if($tdescr == $descr1){
+
 				$id[$n] 			= $row["id"];
 				$date_[$n] 			= $row["date_time"];
 				$date_e[$n] 		= $row["date_time2"];
-				$field[$n] 			= iconv("windows-1251", "utf-8", $row["Field"]);
+				$field[$n] 			= iconv("windows-1251", "utf-8", $row["Field"]);	//Месторождение
 				$bush[$n] 			= iconv("windows-1251", "utf-8", $row["Bush"]);
 				$well[$n]			= iconv("windows-1251", "utf-8", $row["Well"]);
 
@@ -213,8 +227,9 @@
 				$Mass_KG[$n]		 				= $row["Mass_KG"];							//Масса КЖ, прошедшая через УИГ
 				$V_KG[$n]		 					= $row["V_KG"];								//Объем КЖ, прошедший через УИГ
 
-				$Debit_liq[$n]		 				= $row["Debit_liq"];						//Дебит жидкости
+				$Debit_liq[$n]		 				= $row["Debit_liq"];						//Дебит жидкости 
 				$Debit_gas_in_liq[$n]		 		= $row["Debit_gas_in_liq"];					//Дебит раств.газа в  жидкости
+				$Debit_V_gas_in_liq[$n]		 		= $row["Debit_V_Gaz_GK"];					//Дебит раств.газа в  жидкости
 				$Debit_cond[$n]		 				= $row["Debit_cond"];						//Дебит конденсата
 				$Debit_water[$n]		 			= $row["V_KG"];								//Дебит воды
 				$Debit_gaz[$n]		 				= $row["Debit_gaz"];						//Дебит газа 
@@ -248,6 +263,19 @@
 				$Wm_After[$n]						= $row["Wm_After"];
 				$Wv_After[$n]						= $row["Wv_After"];
 
+				//Блок параметров по скважине, вводимых оператором
+				$OW_M_GD[$n]		 					= $row["OW_M_GD"];	
+				$OW_Dens_GD[$n]		 					= $row["OW_Dens_GD"];	
+				$OW_V_PO[$n]		 					= $row["OW_V_PO"];	
+				$OW_m_ZO[$n]		 					= $row["OW_m_ZO"];	
+				$OW_Dens_SK[$n]		 					= $row["OW_Dens_SK"];	
+				$OW_m_PROB[$n]		 					= $row["OW_m_PROB"];	
+
+				//Расчет из данных "блока параметров по скважине, вводимых оператором"
+				$OR_m_RG[$n]		 					= $row["OR_m_RG"];	
+				$OR_W_RG[$n]		 					= $row["OR_W_RG"];	
+
+
 				$n = $n + 1;
 			}
 
@@ -261,7 +289,8 @@
 
 //echo(FormatEx((real)$Vg_GK[0], 3, $NULL));
   	//echo FormatEx($WC5_Accum[0], 7, $NULL);
-  	//echo $Mg_GK[0];
+  	//echo $Debit_V_gas_in_liq[0];
+  	//print_r($OW_Dens_GD);
 ?>
 
 
@@ -317,36 +346,44 @@
 	<TABLE class="table table-bordered table-hover" align="center" BORDER CELLSPACING=0 CELLPADDING=0 WIDTH="100%"  style='border-top:none;border-left:none' style="font size=14" bordercolor="#000000">
 		<thead class="table-dark">
 			<TR align="center" BGCOLOR="#CCCCCC">
-				<TD rowspan="1" colspan="5" style="border-bottom:none;border-right:none">&nbsp;Блок параметров по скважине (ХАЛ), вводимых оператором</TD>
+				<TD rowspan="1" colspan="8" style="border-bottom:none;border-right:none">&nbsp; YБлок параметров по скважине (ХАЛ), вводимых оператором</TD>
 			</TR>
 		</thead>
 
 			<TR align="center" BGCOLOR="#CCCCCC">
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Доля механических примесей <b>(10)</b></TD>
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Доля хлористых солей <b>(11)</b></TD>
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Влагосодержание (ХАЛ или расчет по влагомеру) <b>(12)</b></TD>
-				<TD rowspan="1" id="Dol_ras_gaz_mass_js" style="border-bottom:none;border-right:none">&nbsp;Доля растворенного газа (расчет по пробе КГН) <b>(13)</b></TD>
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Плотность газа, выделевшегося из КГН <b>(14)</b></TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Масса газа деазации <b>(10)</b></TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Плотность газа дегазации <b>(11)</b></TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Водное число пробоотборника <b>(12)</b></TD>
+				<TD rowspan="1" id="Dol_ras_gaz_mass_js" style="border-bottom:none;border-right:none">&nbsp;Масса жидкого остатка дегазации <b>(13)</b></TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Плотность стабильного конденсата <b>(14)</b></TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Масса пробы <b>(14)</b></TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Масса растворенного газа (расчет) <b>(14)</b></TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Массовая доля растворенного газа <b>(14)</b></TD>
 			</TR>
 
 			<TR align="center" BGCOLOR="#CCCCCC">
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;W м.п., %масс</TD>
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;W х.с., %масс</TD>
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;W в, %масс</TD>
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;W р.г., %масс</TD>
-				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;p г. кгн, кг/м3</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;кг</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;кг/м3</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;дм3</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;кг</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;г/см3</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;кг</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;кг</TD>
+				<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;% масс</TD>
 			</TR>
 
 			<?php
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Dol_mech_prim_Read[$nn], 3, $NULL) . '</TD>';	//Доля механических примесей
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Konc_hlor_sol_Read[$nn], 3, $NULL) . '</TD>';	//Концентрация хлористых солей
-						//echo '<TD style="border-bottom:none;border-right:none">' . $Dol_ras_gaz_Read[$nn] . '</TD>';	//Доля растворенного газа
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($vlaj_oil_Read[$nn], 2, $NULL) . '</TD>';		//Влагосодержание
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Dol_ras_gaz_mass[$nn], 3, $NULL) . '</TD>';	//Доля растворенного газа
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Dens_gaz_KGN[$nn], 3, $NULL) . '</TD>';		//Плотность выделевшегося из КГН газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OW_M_GD[$nn], 5, $NULL) . '</TD>';		//Масса газа деазации
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OW_Dens_GD[$nn], 5, $NULL) . '</TD>';	//Плотность газа дегазации
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OW_V_PO[$nn], 5, $NULL) . '</TD>';		//Водное число пробоотборника
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OW_m_ZO[$nn], 5, $NULL) . '</TD>';		//Масса жидкого остатка дегазации
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OW_Dens_SK[$nn], 5, $NULL) . '</TD>';	//Плотность стабильного конденсата
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OW_m_PROB[$nn], 5, $NULL) . '</TD>';	//Масса пробы
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OR_m_RG[$nn], 5, $NULL) . '</TD>';		//Плотность стабильного конденсата
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($OR_W_RG[$nn], 5, $NULL) . '</TD>';		//Масса пробы
 					echo '</TR>'  ;
 				}
 
@@ -417,18 +454,19 @@
 				for ($nn = 0; $nn < $n; $nn++){
 					echo '<TR align="center">';
 
-						echo '<TD id="Mass_brutto_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Mass_brutto_Accum[$nn], 7, $NULL) . '</TD>';//Накопленная масса брутто
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_netto_Accum[$nn], 7, $NULL) . '</TD>';//Накопленная масса нетто
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Water[$nn], 7, $NULL) . '</TD>';//Накопленная масса воды
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Cond[$nn], 3, $NULL) . '</TD>';//Накопленная масса чистого конд
+						echo '<TD id="Mass_brutto_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Mass_brutto_Accum[$nn], 7, $NULL) . '</TD>';	//Накопленная масса брутто
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_netto_Accum[$nn], 7, $NULL) . '</TD>';							//Накопленная масса нетто
+						$Mass_water_Accum = $Mass_brutto_Accum[$nn] - $Mass_netto_Accum[$nn];																		//Накопленная масса воды
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_brutto_Accum[$nn] - $Mass_netto_Accum[$nn], 7, $NULL) . '</TD>';	//Накопленная масса воды
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Cond[$nn], 3, $NULL) . '</TD>';										//Накопленная масса чистого конд
 						echo '<TD id="Volume_Count_Forward_sc_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Volume_Count_Forward_sc_Accum[$nn], 3, $NULL) . '</TD>';//Накопл.объем газа в УИГ
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Gaz[$nn], 3, $NULL) . '</TD>';//Накопленный V чистого газа
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mg_GK[$nn], 6, $NULL) . '</TD>';//Накопленная масса газа в линии ГЖС
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Vg_GK[$nn], 6, $NULL) . '</TD>';//Накопленный объем газа в линии ГЖС
-						echo '<TD id="Mass_Gaz_UVP_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Mass_Gaz_UVP_Accum[$nn], 3, $NULL) . '</TD>';//Масса газа, прошедшая через УИГ
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($WC5_Accum[$nn], 3, $NULL) . '</TD>';//Масса WC5+
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_water_UIG_Accum[$nn], 3, $NULL) . '</TD>';//Масса воды, прошедшя через УИГ
-						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_KG[$nn], 3, $NULL) . '</TD>';//Масса КЖ, прошедшая через УИГ
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($V_Gaz[$nn], 3, $NULL) . '</TD>';										//Накопленный V чистого газа
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mg_GK[$nn], 6, $NULL) . '</TD>';										//Накопленная масса газа в линии ГЖС
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Vg_GK[$nn], 6, $NULL) . '</TD>';										//Накопленный объем газа в линии ГЖС
+						echo '<TD id="Mass_Gaz_UVP_Accum" style="border-bottom:none;border-right:none">' . FormatEx($Mass_Gaz_UVP_Accum[$nn], 3, $NULL) . '</TD>';	//Масса газа, прошедшая через УИГ
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($WC5_Accum[$nn], 3, $NULL) . '</TD>';									//Масса WC5+
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_water_UIG_Accum[$nn], 3, $NULL) . '</TD>';						//Масса воды, прошедшя через УИГ
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Mass_KG[$nn], 3, $NULL) . '</TD>';										//Масса КЖ, прошедшая через УИГ
 						//echo '<TD style="border-bottom:none;border-right:none">' . $V_KG[$nn] . '</TD>';//Объем КЖ, прошедший через УИГ
 
 					echo '</TR>'  ;
@@ -445,7 +483,7 @@
 	<TABLE class="table table-bordered table-hover" align="center" BORDER CELLSPACING=0 CELLPADDING=0 WIDTH="100%"  style='border-top:none;border-left:none' style="font size=14" bordercolor="#000000">
 	<thead class="table-dark">
 		<TR align="center" BGCOLOR="#CCCCCC">
-			<TD rowspan="1" colspan="10" style="border-bottom:none;border-right:none">&nbsp;Блок основных результатов по скважине</TD>
+			<TD rowspan="1" colspan="11" style="border-bottom:none;border-right:none">&nbsp;Блок основных результатов по скважине</TD>
 		</TR>
 	</thead>
 
@@ -458,6 +496,7 @@
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Дебит кап.жидкости в газе сепар.</TD>
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Дебит газа </TD>
 
+			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Дебит раств.газа в  жидкости</TD>
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Дебит раств.газа в  жидкости</TD>
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;Дебит общего газа (расчет)</TD>
 					
@@ -474,11 +513,12 @@
 
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;т/сут</TD>
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;ст.м³/сут</TD>
+			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;ст.м³/сут</TD>
 
 		</TR>
 
 		<?php
-				//$p1 = (float) $Mg_GK[0];
+				//$p1 = (float) $Mg_GK[0];   
 				//echo $p1;
 
 				for ($nn = 0; $nn < $n; $nn++){
@@ -493,6 +533,7 @@
 						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_gaz[$nn], 3, $NULL) . '</TD>';//Дебит газа
 
 						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_gas_in_liq[$nn], 3, $NULL) . '</TD>';//Дебит раств.газа в  жидкости
+						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Debit_V_gas_in_liq[$nn], 3, $NULL) . '</TD>';//Дебит раств.газа в  жидкости
 						echo '<TD style="border-bottom:none;border-right:none">' . FormatEx($Clean_Gaz[$nn], 3, $NULL) . '</TD>';//Дебит чистого газа			
 
 					echo '</TR>'  ;
@@ -561,7 +602,7 @@
 		</TR>
 
 		<TR align="center" BGCOLOR="#CCCCCC">
-			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;[LT300] %</TD>
+			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;[LT300] см</TD>
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;[TT300] °С</TD>
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;[TT500] °С</TD>
 			<TD rowspan="1" style="border-bottom:none;border-right:none">&nbsp;[PT500] МПа</TD>
@@ -711,73 +752,168 @@
 
 <!-- Отправка POST запроса для формирования excel файла -->
 <form action="/web/docviewer/excel_save.php" method="post">
-	<input type="hidden" name="Date_" value="<?=$date_e[0]->format("Y-m-d"); ?>">
-	<input type="hidden" name="Date1_" value="<?=$date_e[0]->format("H:i:s"); ?>">
-	<input type="hidden" name="Field" value="<?=$field[0]; ?>">													<!-- Месторождение -->
-	<input type="hidden" name="Bush" value="<?=$bush[0]; ?>">													<!-- Куст -->
-	<input type="hidden" name="Well" value="<?=$well[0]; ?>">													<!-- Скважина -->
+	<input type="hidden" name="Date_"							value="<?=$date_e[0]->format("Y-m-d"); ?>">
+	<input type="hidden" name="Date1_" 							value="<?=$date_e[0]->format("H:i:s"); ?>">
+	<input type="hidden" name="Field" 							value="<?=$field[0]; ?>">							<!-- Месторождение -->
+	<input type="hidden" name="Bush" 							value="<?=$bush[0]; ?>">							<!-- Куст -->
+	<input type="hidden" name="Well" 							value="<?=$well[0]; ?>">							<!-- Скважина -->
 
-	<input type="hidden" name="Date2_" value="<?=$date_[0]->format("Y-m-d H:i:s"); ?>">							<!-- Дата начала замера -->
-	<input type="hidden" name="Date3_" value="<?=$date_e[0]->format("Y-m-d H:i:s"); ?>">						<!-- Дата конца замера -->
-	<input type="hidden" name="Time_measure" value="<?=round(($time_measure[0])/60); ?>">									<!-- Время замера -->
-	<input type="hidden" name="Rejim" value="<?=$rejim[0]; ?>">													<!-- Режим -->
-	<input type="hidden" name="Method" value="<?=$method[0]; ?>">												<!-- Метод -->
+	<input type="hidden" name="Date2_" 							value="<?=$date_[0]->format("Y-m-d H:i:s"); ?>">	<!-- Дата начала замера -->
+	<input type="hidden" name="Date3_" 							value="<?=$date_e[0]->format("Y-m-d H:i:s"); ?>">	<!-- Дата конца замера -->
+	<input type="hidden" name="Time_measure" 					value="<?=round(($time_measure[0])/60); ?>">		<!-- Время замера -->
+	<input type="hidden" name="Rejim" 							value="<?=$rejim[0]; ?>">							<!-- Режим -->
+	<input type="hidden" name="Method" 							value="<?=$method[0]; ?>">							<!-- Метод -->
 
-	<input type="hidden" name="Dol_mech_prim_Read" value="<?=$Dol_mech_prim_Read[0]; ?>">						<!-- Доля механических примесей -->
-	<input type="hidden" name="Konc_hlor_sol_Read" value="<?=$Konc_hlor_sol_Read[0]; ?>">						<!-- Концентрация хлористых солей -->
-	<input type="hidden" name="Dol_ras_gaz_Read" value="<?=$Dol_ras_gaz_Read[0]; ?>">							<!-- Доля растворенного газа -->
-	<input type="hidden" name="Vlaj_oil_Read" value="<?=$vlaj_oil_Read[0]; ?>">									<!-- Влагосодержание -->
-	<input type="hidden" name="Dol_ras_gaz_mass" value="<?=$Dol_ras_gaz_mass[0]; ?>">							<!-- Доля растворенного газа -->
-	<input type="hidden" name="Dens_gaz_KGN" value="<?=$Dens_gaz_KGN[0]; ?>">									<!-- Плотность выделевшегося из КГН газа -->
+	<input type="hidden" name="Dol_mech_prim_Read" 				value="<?=$Dol_mech_prim_Read[0]; ?>">				<!-- Доля механических примесей -->
+	<input type="hidden" name="Konc_hlor_sol_Read" 				value="<?=$Konc_hlor_sol_Read[0]; ?>">				<!-- Концентрация хлористых солей -->
+	<input type="hidden" name="Dol_ras_gaz_Read" 				value="<?=$Dol_ras_gaz_Read[0]; ?>">				<!-- Доля растворенного газа -->
+	<input type="hidden" name="Vlaj_oil_Read" 					value="<?=$vlaj_oil_Read[0]; ?>">					<!-- Влагосодержание -->
+	<input type="hidden" name="Dol_ras_gaz_mass" 				value="<?=$Dol_ras_gaz_mass[0]; ?>">				<!-- Доля растворенного газа -->
+	<input type="hidden" name="Dens_gaz_KGN" 					value="<?=$Dens_gaz_KGN[0]; ?>">					<!-- Плотность выделевшегося из КГН газа -->
 
-	<input type="hidden" name="Mass_brutto_Accum" value="<?=$Mass_brutto_Accum[0]; ?>">							<!-- Накопленная масса брутто -->
-	<input type="hidden" name="Mass_netto_Accum" value="<?=$Mass_netto_Accum[0]; ?>">							<!-- Накопленная масса нетто -->
-	<input type="hidden" name="Volume_Count_Forward_sc_Accum" value="<?=$Volume_Count_Forward_sc_Accum[0]; ?>">	<!-- Накопленный объем газа в УИГ -->
-	<input type="hidden" name="Mg_GK" value="<?=$Mg_GK[0]; ?>">													<!-- Накопленная масса газа в линии ГЖС -->
-	<input type="hidden" name="Vg_GK" value="<?=$Vg_GK[0]; ?>">													<!-- Накопленный объем газа в линии ГЖС -->
-	<input type="hidden" name="Mass_Gaz_UVP_Accum" value="<?=$Mass_Gaz_UVP_Accum[0]; ?>">						<!-- Масса газа, прошедшая через УИГ -->
-	<input type="hidden" name="WC5_Accum" value="<?=$WC5_Accum[0]; ?>">											<!-- Масса WC5+ -->
-	<input type="hidden" name="Mass_water_UIG_Accum" value="<?=$Mass_water_UIG_Accum[0]; ?>">					<!-- Масса воды, прошедшя через УИГ -->
-	<input type="hidden" name="Mass_KG" value="<?=$Mass_KG[0]; ?>">												<!-- Масса КЖ, прошедшая через УИГ -->
-	<input type="hidden" name="V_KG" value="<?=$V_KG[0]; ?>">													<!-- Объем КЖ, прошедший через УИГ -->
+	<input type="hidden" name="Mass_brutto_Accum" 				value="<?=$Mass_brutto_Accum[0]; ?>">				<!-- Накопленная масса брутто -->
+	<input type="hidden" name="Mass_netto_Accum" 				value="<?=$Mass_netto_Accum[0]; ?>">				<!-- Накопленная масса нетто -->
+	<input type="hidden" name="Volume_Count_Forward_sc_Accum" 	value="<?=$Volume_Count_Forward_sc_Accum[0]; ?>">	<!-- Накопленный объем газа в УИГ -->
+	<input type="hidden" name="Mg_GK" 							value="<?=$Mg_GK[0]; ?>">							<!-- Накопленная масса газа в линии ГЖС -->
+	<input type="hidden" name="Vg_GK" 							value="<?=$Vg_GK[0]; ?>">							<!-- Накопленный объем газа в линии ГЖС -->
+	<input type="hidden" name="Mass_Gaz_UVP_Accum" 				value="<?=$Mass_Gaz_UVP_Accum[0]; ?>">				<!-- Масса газа, прошедшая через УИГ -->
+	<input type="hidden" name="WC5_Accum" 						value="<?=$WC5_Accum[0]; ?>">						<!-- Масса WC5+ -->
+	<input type="hidden" name="Mass_water_UIG_Accum" 			value="<?=$Mass_water_UIG_Accum[0]; ?>">			<!-- Масса воды, прошедшя через УИГ -->
+	<input type="hidden" name="Mass_KG" 						value="<?=$Mass_KG[0]; ?>">							<!-- Масса КЖ, прошедшая через УИГ -->
+	<input type="hidden" name="V_KG" 							value="<?=$V_KG[0]; ?>">							<!-- Объем КЖ, прошедший через УИГ -->
 
-	<input type="hidden" name="Debit_liq" value="<?=$Debit_liq[0]; ?>">											<!-- Дебит жидкости -->
-	<input type="hidden" name="Debit_gas_in_liq" value="<?=$Debit_gas_in_liq[0]; ?>">							<!-- Дебит раств.газа в  жидкости -->
-	<input type="hidden" name="Debit_cond" value="<?=$Debit_cond[0]; ?>">										<!-- Дебит конденсата -->
-	<input type="hidden" name="Debit_water" value="<?=$Debit_water[0]; ?>">										<!-- Дебит воды -->
-	<input type="hidden" name="Debit_gaz" value="<?=$Debit_gaz[0]; ?>">											<!-- Дебит газа -->
-	<input type="hidden" name="Debit_KG" value="<?=$Debit_KG[0]; ?>">											<!-- Дебит кап.жидкости в газе сепар. -->
+	<input type="hidden" name="Debit_liq" 						value="<?=$Debit_liq[0]; ?>">						<!-- Дебит жидкости -->
+	<input type="hidden" name="Debit_gas_in_liq" 				value="<?=$Debit_gas_in_liq[0]; ?>">				<!-- Дебит раств.газа в  жидкости -->
+	<input type="hidden" name="Debit_cond" 						value="<?=$Debit_cond[0]; ?>">						<!-- Дебит конденсата -->
+	<input type="hidden" name="Debit_water" 					value="<?=$Debit_water[0]; ?>">						<!-- Дебит воды -->
+	<input type="hidden" name="Debit_gaz" 						value="<?=$Debit_gaz[0]; ?>">						<!-- Дебит газа -->
+	<input type="hidden" name="Debit_KG" 						value="<?=$Debit_KG[0]; ?>">						<!-- Дебит кап.жидкости в газе сепар. -->
 
-	<input type="hidden" name="Clean_Gaz" value="<?=$Clean_Gaz[0]; ?>">											<!-- Дебит чистого газа -->
-	<input type="hidden" name="Clean_Cond" value="<?=$Clean_Cond[0]; ?>">										<!-- Дебит чистого конденсата -->
-	<input type="hidden" name="V_Water" value="<?=$V_Water[0]; ?>">												<!-- Накопленная масса воды -->
-	<input type="hidden" name="V_Cond" value="<?=$V_Cond[0]; ?>">												<!-- Накопленная масса чистого конд -->
-	<input type="hidden" name="V_Gaz" value="<?=$V_Gaz[0]; ?>">													<!-- Накопленный V чистого газа -->
+	<input type="hidden" name="Clean_Gaz" 						value="<?=$Clean_Gaz[0]; ?>">						<!-- Дебит чистого газа -->
+	<input type="hidden" name="Clean_Cond" 						value="<?=$Clean_Cond[0]; ?>">						<!-- Дебит чистого конденсата -->
+	<input type="hidden" name="V_Water" 						value="<?=$V_Water[0]; ?>">							<!-- Накопленная масса воды -->
+	<input type="hidden" name="V_Cond" 							value="<?=$V_Cond[0]; ?>">							<!-- Накопленная масса чистого конд -->
+	<input type="hidden" name="V_Gaz" 							value="<?=$V_Gaz[0]; ?>">							<!-- Накопленный V чистого газа -->
 
-	<input type="hidden" name="TT100" value="<?=$TT100[0]; ?>">													<!-- Температура во входном коллекторе -->
-	<input type="hidden" name="PT100" value="<?=$PT100[0]; ?>">													<!-- Давление во входном коллекторе -->
-	<input type="hidden" name="PT201" value="<?=$PT201[0]; ?>">													<!-- Давление на всасе Н-1 -->
-	<input type="hidden" name="PDT200" value="<?=$PDT200[0]; ?>">												<!-- Перепад давления на фильтре -->
-	<input type="hidden" name="PT202" value="<?=$PT202[0]; ?>">													<!-- Давление на выкиде Н-1 -->
-	<input type="hidden" name="PT300" value="<?=$PT300[0]; ?>">													<!-- Давление в газосепараторе ГС-1 -->
-	<input type="hidden" name="LT300" value="<?=$LT300[0]; ?>">													<!-- Уровень в емкости Е-1 -->
-	<input type="hidden" name="TT300" value="<?=$TT300[0]; ?>">													<!-- Темп в емкости Е-1 -->
-	<input type="hidden" name="TT500" value="<?=$TT500[0]; ?>">													<!-- Темп в вых. коллек жидк -->
-	<input type="hidden" name="PT500" value="<?=$PT500[0]; ?>">													<!-- Давл в вых. коллек жидк -->
-	<input type="hidden" name="TT700" value="<?=$TT700[0]; ?>">													<!-- Темп в вых. коллек газа -->
-	<input type="hidden" name="PT700" value="<?=$PT700[0]; ?>">													<!-- Давл в вых. коллек газа -->
+	<input type="hidden" name="TT100" 							value="<?=$TT100[0]; ?>">							<!-- Температура во входном коллекторе -->
+	<input type="hidden" name="PT100" 							value="<?=$PT100[0]; ?>">							<!-- Давление во входном коллекторе -->
+	<input type="hidden" name="PT201" 							value="<?=$PT201[0]; ?>">							<!-- Давление на всасе Н-1 -->
+	<input type="hidden" name="PDT200" 							value="<?=$PDT200[0]; ?>">							<!-- Перепад давления на фильтре -->
+	<input type="hidden" name="PT202" 							value="<?=$PT202[0]; ?>">							<!-- Давление на выкиде Н-1 -->
+	<input type="hidden" name="PT300" 							value="<?=$PT300[0]; ?>">							<!-- Давление в газосепараторе ГС-1 -->
+	<input type="hidden" name="LT300" 							value="<?=$LT300[0]; ?>">							<!-- Уровень в емкости Е-1 -->
+	<input type="hidden" name="TT300" 							value="<?=$TT300[0]; ?>">							<!-- Темп в емкости Е-1 -->
+	<input type="hidden" name="TT500" 							value="<?=$TT500[0]; ?>">							<!-- Темп в вых. коллек жидк -->
+	<input type="hidden" name="PT500" 							value="<?=$PT500[0]; ?>">							<!-- Давл в вых. коллек жидк -->
+	<input type="hidden" name="TT700" 							value="<?=$TT700[0]; ?>">							<!-- Темп в вых. коллек газа -->
+	<input type="hidden" name="PT700" 							value="<?=$PT700[0]; ?>">							<!-- Давл в вых. коллек газа -->
 
-	<input type="hidden" name="FS_P" value="<?=$FS_P[0]; ?>">													<!-- Давление в линии газа -->
-	<input type="hidden" name="FS_T" value="<?=$FS_T[0]; ?>">													<!-- Температура в линии газа -->
-	<input type="hidden" name="FS_Qw" value="<?=$FS_Qw[0]; ?>">													<!-- Дебит газа FLOWSIC -->
-	<input type="hidden" name="FS_Qs" value="<?=$FS_Qs[0]; ?>">													<!-- Дебит газа FLOWSIC -->
+	<input type="hidden" name="FS_P" 							value="<?=$FS_P[0]; ?>">							<!-- Давление в линии газа -->
+	<input type="hidden" name="FS_T" 							value="<?=$FS_T[0]; ?>">							<!-- Температура в линии газа -->
+	<input type="hidden" name="FS_Qw" 							value="<?=$FS_Qw[0]; ?>">							<!-- Дебит газа FLOWSIC -->
+	<input type="hidden" name="FS_Qs" 							value="<?=$FS_Qs[0]; ?>">							<!-- Дебит газа FLOWSIC -->
 
-	<input type="hidden" name="RT_Dens" value="<?=$RT_Dens[0]; ?>">												<!-- Плотность жидкости ROTAMASS -->
-	<input type="hidden" name="RT_Vlaj" value="<?=$RT_Vlaj[0]; ?>">												<!-- Обводнённость влагомер -->
+	<input type="hidden" name="RT_Dens" 						value="<?=$RT_Dens[0]; ?>">							<!-- Плотность жидкости ROTAMASS -->
+	<input type="hidden" name="RT_Vlaj" 						value="<?=$RT_Vlaj[0]; ?>">							<!-- Обводнённость влагомер -->
 
 	<input class="button_print but_weight" type="submit" name="Сформировать Excel файл по замеру" value="Сформировать Excel файл по замеру">
+	
 	<br />
 	<br />
+</form>
+
+<!-- Отправка POST запроса для формирования excel файла -->
+<form action="/web/docviewer/excel_save_new.php" method="post">
+	<input type="hidden" name="Date_"							value="<?=$date_e[0]->format("Y-m-d"); ?>">
+	<input type="hidden" name="Date1_" 							value="<?=$date_e[0]->format("H:i:s"); ?>">
+	<input type="hidden" name="Field" 							value="<?=$field[0]; ?>">							<!-- Месторождение -->
+	<input type="hidden" name="Bush" 							value="<?=$bush[0]; ?>">							<!-- Куст -->
+	<input type="hidden" name="Well" 							value="<?=$well[0]; ?>">							<!-- Скважина -->
+
+	<input type="hidden" name="Date2_" 							value="<?=$date_[0]->format("Y-m-d H:i:s"); ?>">	<!-- Дата начала замера -->
+	<input type="hidden" name="Date3_" 							value="<?=$date_e[0]->format("Y-m-d H:i:s"); ?>">	<!-- Дата конца замера -->
+	<input type="hidden" name="Time_measure" 					value="<?=round(($time_measure[0])/60); ?>">		<!-- Время замера -->
+	<input type="hidden" name="Rejim" 							value="<?=$rejim[0]; ?>">							<!-- Режим -->
+	<input type="hidden" name="Method" 							value="<?=$method[0]; ?>">							<!-- Метод -->
+
+	<input type="hidden" name="Dol_mech_prim_Read" 				value="<?=$Dol_mech_prim_Read[0]; ?>">				<!-- Доля механических примесей -->
+	<input type="hidden" name="Konc_hlor_sol_Read" 				value="<?=$Konc_hlor_sol_Read[0]; ?>">				<!-- Концентрация хлористых солей -->
+	<input type="hidden" name="Dol_ras_gaz_Read" 				value="<?=$Dol_ras_gaz_Read[0]; ?>">				<!-- Доля растворенного газа -->
+	<input type="hidden" name="Vlaj_oil_Read" 					value="<?=$vlaj_oil_Read[0]; ?>">					<!-- Влагосодержание -->
+	<input type="hidden" name="Dol_ras_gaz_mass" 				value="<?=$Dol_ras_gaz_mass[0]; ?>">				<!-- Доля растворенного газа -->
+	<input type="hidden" name="Dens_gaz_KGN" 					value="<?=$Dens_gaz_KGN[0]; ?>">					<!-- Плотность выделевшегося из КГН газа -->
+
+	<!-- Блок параметров по замеру --------------------------------------------------------------------------------------------------------------------------------------->
+	<input type="hidden" name="Mass_brutto_Accum" 				value="<?=$Mass_brutto_Accum[0]; ?>">				<!-- Накоп масса жидкости в линии ГСЖ (ГК брутто) -->
+	<input type="hidden" name="Mass_netto_Accum" 				value="<?=$Mass_netto_Accum[0]; ?>">				<!-- Накоп масса конденсата в линии ГСЖ (ГК нетто) -->
+	<input type="hidden" name="Mass_water_Accum" 				value="<?=$Mass_water_Accum; ?>">					<!-- Накопленная масса воды (расчет) -->
+	<input type="hidden" name="V_Cond" 							value="<?=$V_Cond[0]; ?>">							<!-- Накоп масса конд -->
+	<input type="hidden" name="Volume_Count_Forward_sc_Accum" 	value="<?=$Volume_Count_Forward_sc_Accum[0]; ?>">	<!-- Накопленный объем газа в УИГ -->
+	<input type="hidden" name="V_Gaz" 							value="<?=$V_Gaz[0]; ?>">							<!-- Накоп объем газа -->
+	<input type="hidden" name="Mg_GK" 							value="<?=$Mg_GK[0]; ?>">							<!-- Накоп масса газа в ГЖС -->
+	<input type="hidden" name="Vg_GK" 							value="<?=$Vg_GK[0]; ?>">							<!-- Накоп объем газа в ГЖС -->
+	<input type="hidden" name="Mass_Gaz_UVP_Accum" 				value="<?=$Mass_Gaz_UVP_Accum[0]; ?>">				<!-- Масса газа, прошедшая через УИГ -->
+	<input type="hidden" name="WC5_Accum" 						value="<?=$WC5_Accum[0]; ?>">						<!-- Масса WC5+ -->
+	<input type="hidden" name="Mass_water_UIG_Accum" 			value="<?=$Mass_water_UIG_Accum[0]; ?>">			<!-- Масса воды, прошедшя через УИГ -->
+	<input type="hidden" name="Mass_KG" 						value="<?=$Mass_KG[0]; ?>">							<!-- Масса КЖ, прошедшая через УИГ -->
+
+	<!-- Блок основных результатов по скважине --------------------------------------------------------------------------------------------------------------------------------------->
+	<input type="hidden" name="Debit_liq" 						value="<?=$Debit_liq[0]; ?>">						<!-- Дебит жидкости -->
+	<input type="hidden" name="Debit_cond" 						value="<?=$Debit_cond[0]; ?>">						<!-- Дебит конденсата -->
+	<input type="hidden" name="Debit_water" 					value="<?=$Debit_water[0]; ?>">						<!-- Дебит воды -->
+	<input type="hidden" name="Clean_Cond" 						value="<?=$Clean_Cond[0]; ?>">						<!-- Дебит чистого конденсата -->
+	<input type="hidden" name="Debit_KG" 						value="<?=$Debit_KG[0]; ?>">						<!-- Дебит кап.жидкости в газе сепар. -->
+	<input type="hidden" name="Debit_gaz" 						value="<?=$Debit_gaz[0]; ?>">						<!-- Дебит газа -->
+	<input type="hidden" name="Debit_gas_in_liq" 				value="<?=$Debit_gas_in_liq[0]; ?>">				<!-- Дебит раств.газа в  жидкости -->
+	<input type="hidden" name="Debit_V_gas_in_liq" 				value="<?=$Debit_V_gas_in_liq[0]; ?>">				<!-- Дебит раств.газа в  жидкости -->
+	<input type="hidden" name="Clean_Gaz" 						value="<?=$Clean_Gaz[0]; ?>">						<!-- Дебит чистого газа -->
+
+	<!--  Общие технологические параметры установки при измерении --------------------------------------------------------------------------------------------------------------------------------------->
+	<input type="hidden" name="TT100" 							value="<?=$TT100[0]; ?>">							<!-- Температура во входном коллекторе -->
+	<input type="hidden" name="PT100" 							value="<?=$PT100[0]; ?>">							<!-- Давление во входном коллекторе -->
+	<input type="hidden" name="PT201" 							value="<?=$PT201[0]; ?>">							<!-- Давление на всасе Н-1 -->
+	<input type="hidden" name="PDT200" 							value="<?=$PDT200[0]; ?>">							<!-- Перепад давления на фильтре -->
+	<input type="hidden" name="PT202" 							value="<?=$PT202[0]; ?>">							<!-- Давление на выкиде Н-1 -->
+	<input type="hidden" name="PT300" 							value="<?=$PT300[0]; ?>">							<!-- Давление в газосепараторе ГС-1 -->
+	<input type="hidden" name="LT300" 							value="<?=$LT300[0]; ?>">							<!-- Уровень в емкости Е-1 -->
+	<input type="hidden" name="TT300" 							value="<?=$TT300[0]; ?>">							<!-- Темп в емкости Е-1 -->
+	<input type="hidden" name="TT500" 							value="<?=$TT500[0]; ?>">							<!-- Темп в вых. коллек жидк -->
+	<input type="hidden" name="PT500" 							value="<?=$PT500[0]; ?>">							<!-- Давл в вых. коллек жидк -->
+	<input type="hidden" name="TT700" 							value="<?=$TT700[0]; ?>">							<!-- Темп в вых. коллек газа -->
+	<input type="hidden" name="PT700" 							value="<?=$PT700[0]; ?>">							<!-- Давл в вых. коллек газа -->
+
+	<!--  FLOWSIC --------------------------------------------------------------------------------------------------------------------------------------->
+	<input type="hidden" name="FS_P" 							value="<?=$FS_P[0]; ?>">							<!-- Давление в линии газа -->
+	<input type="hidden" name="FS_T" 							value="<?=$FS_T[0]; ?>">							<!-- Температура в линии газа -->
+	<input type="hidden" name="FS_Qw" 							value="<?=$FS_Qw[0]; ?>">							<!-- Дебит газа FLOWSIC -->
+	<input type="hidden" name="FS_Qs" 							value="<?=$FS_Qs[0]; ?>">							<!-- Дебит газа FLOWSIC -->
+
+	<!-- ROTAMASS --------------------------------------------------------------------------------------------------------------------------------------->
+	<!--<input type="hidden" name="Debit_liq" 						value="<?=$Debit_liq[0]; ?>">	-->				<!-- Дебит жидкости ROTAMASS -->
+	<input type="hidden" name="Mass_brutto_Accum" 				value="<?=$Mass_brutto_Accum[0]; ?>">				<!-- Масса жидкости ROTAMASS -->
+	<input type="hidden" name="RT_Dens" 						value="<?=$RT_Dens[0]; ?>">							<!-- Плотность жидкости ROTAMASS -->
+
+	<!-- ВСН-2 --------------------------------------------------------------------------------------------------------------------------------------->
+	<input type="hidden" name="RT_Vlaj" 						value="<?=$RT_Vlaj[0]; ?>">							<!-- Обводнённость влагомер -->
+	
+
+
+
+
+	<input type="hidden" name="RT_Dens" 						value="<?=$RT_Dens[0]; ?>">							<!-- Плотность жидкости ROTAMASS -->
+	<input type="hidden" name="RT_Vlaj" 						value="<?=$RT_Vlaj[0]; ?>">							<!-- Обводнённость влагомер -->
+
+	<input type="hidden" name="OW_M_GD" 						value="<?=$OW_M_GD[0]; ?>">							<!-- Масса газа деазации -->
+	<input type="hidden" name="OW_Dens_GD" 						value="<?=$OW_Dens_GD[0]; ?>">						<!-- Плотность газа дегазации -->
+	<input type="hidden" name="OW_V_PO" 						value="<?=$OW_V_PO[0]; ?>">							<!-- Водное число пробоотборника -->
+	<input type="hidden" name="OW_m_ZO" 						value="<?=$OW_m_ZO[0]; ?>">							<!-- Масса жидкого остатка дегазации -->
+	<input type="hidden" name="OW_Dens_SK" 						value="<?=$OW_Dens_SK[0]; ?>">						<!-- Плотность стабильного конденсата -->
+	<input type="hidden" name="OW_m_PROB" 						value="<?=$OW_m_PROB[0]; ?>">						<!-- Масса пробы -->
+
+	<input type="hidden" name="OR_m_RG" 						value="<?=$OR_m_RG[0]; ?>">							<!-- Плотность стабильного конденсата -->
+	<input type="hidden" name="OR_W_RG" 						value="<?=$OR_W_RG[0]; ?>">							<!-- Масса пробы -->
+
+	<input class="button_print but_weight" type="submit" name="Сформировать новый Excel файл по замеру" value="Сформировать новый Excel файл по замеру">
 </form>
 
 <!-- Отправка POST запроса для удаления строки из БД -->

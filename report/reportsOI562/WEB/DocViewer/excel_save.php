@@ -4,6 +4,7 @@
 	require_once __DIR__ . '/PHPExcel/Classes/PHPExcel/Writer/Excel2007.php';
  	require_once __DIR__ . '/PHPExcel/Classes/PHPExcel/IOFactory.php';
 
+ 	include "function.php";
 
  	//Создаем объект класса PHPExcel
 	$xls = new PHPExcel();
@@ -89,68 +90,69 @@
 	$RT_Dens   						= $_POST["RT_Dens"];						//Плотность жидкости ROTAMASS
 	$RT_Vlaj   						= $_POST["RT_Vlaj"];						//Обводнённость влагомер
 
-	$sheet->setCellValue("E2", $Date_);								//Дата записи в журнал
-	$sheet->setCellValue("E3", $Date1_);							//Время записи в журнал
-	$sheet->setCellValue("E4", $Field);								//Месторождение
-	$sheet->setCellValue("E5", $Bush);								//Куст
-	$sheet->setCellValue("E6", $Well);								//Скважина
+	$sheet->setCellValue("E2", $Date_);									//Дата записи в журнал
+	$sheet->setCellValue("E3", $Date1_);								//Время записи в журнал
+	$sheet->setCellValue("E4", $Field);									//Месторождение
+	$sheet->setCellValue("E5", $Bush);									//Куст
+	$sheet->setCellValue("E6", $Well);									//Скважина
 
-	$sheet->setCellValue("E7", $Date2_);							//Дата начала замера
-	$sheet->setCellValue("E8", $Date3_);							//Дата конца замера
-	$sheet->setCellValue("E9", $Time_measure);						//Время замера
-	$sheet->setCellValue("E10", $Rejim);							//Режим
-	$sheet->setCellValue("E11", $Method);							//Метод
+	$sheet->setCellValue("E7", $Date2_);								//Дата начала замера
+	$sheet->setCellValue("E8", $Date3_);								//Дата конца замера
+	$sheet->setCellValue("E9", $Time_measure);							//Время замера
+	$sheet->setCellValue("E10", $Rejim);								//Режим
+	$sheet->setCellValue("E11", $Method);								//Метод
 
-	$sheet->setCellValue("E12", $Dol_mech_prim_Read);				//Доля механических примесей
-	$sheet->setCellValue("E13", $Konc_hlor_sol_Read);				//Концентрация хлористых солей
-	$sheet->setCellValue("E14", $Vlaj_oil_Read);					//Влагосодержание
-	$sheet->setCellValue("E15", $Dol_ras_gaz_mass);					//Доля растворенного газа
-	$sheet->setCellValue("E16", $Dens_gaz_KGN);						//Плотность выделевшегося из КГН газа
+	$sheet->setCellValue("E12", FormatEx($Dol_mech_prim_Read, 3, $NULL));					//Доля механических примесей
+	$sheet->setCellValue("E13", FormatEx($Konc_hlor_sol_Read, 3, $NULL));					//Концентрация хлористых солей
+	$sheet->setCellValue("E14", FormatEx($Vlaj_oil_Read, 3, $NULL));						//Влагосодержание
+	$sheet->setCellValue("E15", FormatEx($Dol_ras_gaz_mass, 3, $NULL));						//Доля растворенного газа
+	$sheet->setCellValue("E16", FormatEx($Dens_gaz_KGN, 3, $NULL));							//Плотность выделевшегося из КГН газа
 
-	$sheet->setCellValue("E17", $Mass_brutto_Accum);				//Накопленная масса брутто
-	$sheet->setCellValue("E18", $Mass_netto_Accum);					//Накопленная масса нетто
-	$sheet->setCellValue("E19", $V_Water);							//Накопленная масса воды
-	$sheet->setCellValue("E20", $V_Cond);							//Накопленная масса чистого конд
-	$sheet->setCellValue("E21", $Volume_Count_Forward_sc_Accum);	//Накопленный объем газа в УИГ
-	$sheet->setCellValue("E22", $V_Gaz);							//Накопленный V чистого газа
-	$sheet->setCellValue("E23", $Mg_GK);							//Накопленная масса газа в линии ГЖС
-	$sheet->setCellValue("E24", $Vg_GK);							//Накопленный объем газа в линии ГЖС
-	$sheet->setCellValue("E25", $Mass_Gaz_UVP_Accum);				//Масса газа, прошедшая через УИГ
-	$sheet->setCellValue("E26", $WC5_Accum);						//Масса WC5+
-	$sheet->setCellValue("E27", $Mass_water_UIG_Accum);				//Масса воды, прошедшя через УИГ
-	$sheet->setCellValue("E28", $Mass_KG);							//Масса КЖ, прошедшая через УИГ
+	$sheet->setCellValue("E17", FormatEx($Mass_brutto_Accum, 3, $NULL));					//Накопленная масса брутто
+	$sheet->setCellValue("E18", FormatEx($Mass_netto_Accum, 3, $NULL));						//Накопленная масса нетто
+	$sheet->setCellValue("E19", FormatEx(($Mass_brutto_Accum - $Mass_netto_Accum), 3, $NULL));//Накопленная масса воды
+	//$sheet->setCellValue("E19", $V_Water);												//Накопленная масса воды
+	$sheet->setCellValue("E20", FormatEx($V_Cond, 3, $NULL));								//Накопленная масса чистого конд
+	$sheet->setCellValue("E21", FormatEx($Volume_Count_Forward_sc_Accum, 3, $NULL));		//Накопленный объем газа в УИГ
+	$sheet->setCellValue("E22", FormatEx($V_Gaz, 3, $NULL));								//Накопленный V чистого газа
+	$sheet->setCellValue("E23", FormatEx($Mg_GK, 3, $NULL));								//Накопленная масса газа в линии ГЖС
+	$sheet->setCellValue("E24", FormatEx($Vg_GK, 3, $NULL));								//Накопленный объем газа в линии ГЖС
+	$sheet->setCellValue("E25", FormatEx($Mass_Gaz_UVP_Accum, 3, $NULL));					//Масса газа, прошедшая через УИГ
+	$sheet->setCellValue("E26", FormatEx($WC5_Accum, 3, $NULL));							//Масса WC5+
+	$sheet->setCellValue("E27", FormatEx($Mass_water_UIG_Accum, 3, $NULL));					//Масса воды, прошедшя через УИГ
+	$sheet->setCellValue("E28", FormatEx($Mass_KG, 3, $NULL));								//Масса КЖ, прошедшая через УИГ
 	
-	$sheet->setCellValue("E29", $Debit_liq);						//Дебит жидкости
-	$sheet->setCellValue("E30", $Debit_cond);						//Дебит конденсата
-	$sheet->setCellValue("E31", $Debit_water);						//Дебит воды
-	$sheet->setCellValue("E32", $Clean_Cond);						//Дебит чистого конденсата
-	$sheet->setCellValue("E33", $Debit_KG);							//Дебит кап.жидкости в газе сепар.
-	$sheet->setCellValue("E34", $Debit_gaz);						//Дебит газа
-	$sheet->setCellValue("E35", $Debit_gas_in_liq);					//Дебит раств.газа в  жидкости
-	$sheet->setCellValue("E36", $Clean_Gaz);						//Дебит чистого газа
+	$sheet->setCellValue("E29", FormatEx($Debit_liq, 3, $NULL));							//Дебит жидкости
+	$sheet->setCellValue("E30", FormatEx($Debit_cond, 3, $NULL));							//Дебит конденсата
+	$sheet->setCellValue("E31", FormatEx($Debit_water, 3, $NULL));							//Дебит воды
+	$sheet->setCellValue("E32", FormatEx($Clean_Cond, 3, $NULL));							//Дебит чистого конденсата
+	$sheet->setCellValue("E33", FormatEx($Debit_KG, 3, $NULL));								//Дебит кап.жидкости в газе сепар.
+	$sheet->setCellValue("E34", FormatEx($Debit_gaz, 3, $NULL));							//Дебит газа
+	$sheet->setCellValue("E35", FormatEx($Debit_gas_in_liq, 3, $NULL));						//Дебит раств.газа в  жидкости
+	$sheet->setCellValue("E36", FormatEx($Clean_Gaz, 3, $NULL));							//Дебит чистого газа
 	
-	$sheet->setCellValue("E37", $TT100);							//Температура во входном коллекторе
-	$sheet->setCellValue("E38", $PT100);							//Давление во входном коллекторе
-	$sheet->setCellValue("E39", $PT201);							//Давление на всасе Н-1
-	$sheet->setCellValue("E40", $PDT200);							//Перепад давления на фильтре
-	$sheet->setCellValue("E41", $PT202);							//Давление на выкиде Н-1
-	$sheet->setCellValue("E42", $PT300);							//Давление в газосепараторе ГС-1
-	$sheet->setCellValue("E43", $LT300);							//Уровень в емкости Е-1
-	$sheet->setCellValue("E44", $TT300);							//Темп в емкости Е-1
-	$sheet->setCellValue("E45", $TT500);							//Темп в вых. коллек жидк
-	$sheet->setCellValue("E46", $PT500);							//Давл в вых. коллек жидк
-	$sheet->setCellValue("E47", $TT700);							//Темп в вых. коллек газа
-	$sheet->setCellValue("E48", $PT700);							//Давл в вых. коллек газа
+	$sheet->setCellValue("E37", FormatEx($TT100, 3, $NULL));								//Температура во входном коллекторе
+	$sheet->setCellValue("E38", FormatEx($PT100, 3, $NULL));								//Давление во входном коллекторе
+	$sheet->setCellValue("E39", FormatEx($PT201, 3, $NULL));								//Давление на всасе Н-1
+	$sheet->setCellValue("E40", FormatEx($PDT200, 3, $NULL));								//Перепад давления на фильтре
+	$sheet->setCellValue("E41", FormatEx($PT202, 3, $NULL));								//Давление на выкиде Н-1
+	$sheet->setCellValue("E42", FormatEx($PT300, 3, $NULL));								//Давление в газосепараторе ГС-1
+	$sheet->setCellValue("E43", FormatEx($LT300, 3, $NULL));								//Уровень в емкости Е-1
+	$sheet->setCellValue("E44", FormatEx($TT300, 3, $NULL));								//Темп в емкости Е-1
+	$sheet->setCellValue("E45", FormatEx($TT500, 3, $NULL));								//Темп в вых. коллек жидк
+	$sheet->setCellValue("E46", FormatEx($PT500, 3, $NULL));								//Давл в вых. коллек жидк
+	$sheet->setCellValue("E47", FormatEx($TT700, 3, $NULL));								//Темп в вых. коллек газа
+	$sheet->setCellValue("E48", FormatEx($PT700, 3, $NULL));								//Давл в вых. коллек газа
 
-	$sheet->setCellValue("E49", $FS_P);								//Давление в линии газа
-	$sheet->setCellValue("E50", $FS_T);								//Температура в линии газа
-	$sheet->setCellValue("E51", $FS_Qw);							//Дебит газа FLOWSIC
-	$sheet->setCellValue("E52", $FS_Qs);							//Дебит газа FLOWSIC
+	$sheet->setCellValue("E49", FormatEx($FS_P, 3, $NULL));									//Давление в линии газа
+	$sheet->setCellValue("E50", FormatEx($FS_T, 3, $NULL));									//Температура в линии газа
+	$sheet->setCellValue("E51", FormatEx($FS_Qw, 3, $NULL));								//Дебит газа FLOWSIC
+	$sheet->setCellValue("E52", FormatEx($FS_Qs, 3, $NULL));								//Дебит газа FLOWSIC
 
-	$sheet->setCellValue("E53", $Debit_liq);						//Дебит жидкости ROTAMASS
-	$sheet->setCellValue("E54", $Mass_brutto_Accum);				//Масса жидкости ROTAMASS
-	$sheet->setCellValue("E55", $RT_Dens);							//Плотность жидкости ROTAMASS
-	$sheet->setCellValue("E56", $RT_Vlaj);							//Обводнённость влагомер
+	$sheet->setCellValue("E53", FormatEx($Debit_liq, 3, $NULL));							//Дебит жидкости ROTAMASS
+	$sheet->setCellValue("E54", FormatEx($Mass_brutto_Accum, 3, $NULL));					//Масса жидкости ROTAMASS
+	$sheet->setCellValue("E55", FormatEx($RT_Dens, 3, $NULL));								//Плотность жидкости ROTAMASS
+	$sheet->setCellValue("E56", FormatEx($RT_Vlaj, 3, $NULL));								//Обводнённость влагомер
 
 
 	//Массив строк столбца D
