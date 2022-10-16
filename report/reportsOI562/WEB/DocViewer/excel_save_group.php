@@ -129,7 +129,7 @@
 	$Debit_V_gas_in_liq   			= array();		//Дебит раств.газа в жидкости
 	$Clean_Gaz   					= array();		//Дебит чистого газа
 
-	//Блок основных результатов по скважине
+	//Общие технологические параметры установки при измерении
 	$TT100   						= array();		//Температура во входном коллекторе
 	$PT100   						= array();		//Давление во входном коллекторе
 	$PT201   						= array();		//Давление на всасе Н-1
@@ -218,10 +218,10 @@
 			$Debit_KG[$n]   					= $row["Debit_KG"];										//Дебит кап.жидкости в газе сепар.
 			$Debit_gaz[$n]   					= $row["Debit_gaz"];									//Дебит газа
 			$Debit_gas_in_liq[$n]   			= $row["Debit_gas_in_liq"];								//Дебит раств.газа в жидкости
-			$Debit_V_gas_in_liq[$n]   			= $row["Debit_V_gas_in_liq"];							//Дебит раств.газа в жидкости
+			$Debit_V_gas_in_liq[$n]   			= $row["Debit_V_Gaz_GK"];								//Дебит раств.газа в жидкости
 			$Clean_Gaz[$n]   					= $row["Clean_Gaz"];									//Дебит чистого газа
 
-			//Блок основных результатов по скважине
+			//Общие технологические параметры установки при измерении
 			$TT100[$n]   						= $row["TT100"];										//Температура во входном коллекторе
 			$PT100[$n]   						= $row["PT100"];										//Давление во входном коллекторе
 			$PT201[$n]   						= $row["PT201"];										//Давление на всасе Н-1
@@ -267,23 +267,89 @@
 	//Получаем активный лист
 	$sheet = $xls->getActiveSheet();
 
-	//Настройка ширины столбцов
+	//----------------------------Настройка ширины столбцов------------------------------
+	//Блок идентификационных параметров скважины
 	$sheet->getColumnDimension("A")->setWidth(20);
 	$sheet->getColumnDimension("B")->setWidth(18);
 	$sheet->getColumnDimension("C")->setWidth(8);
 	$sheet->getColumnDimension("D")->setWidth(10);
 	
+	//Блок идентификационных данных измерения и информация о режиме измерения
 	$sheet->getColumnDimension("E")->setWidth(20);
 	$sheet->getColumnDimension("F")->setWidth(20);
 	$sheet->getColumnDimension("G")->setWidth(15);
 	$sheet->getColumnDimension("H")->setWidth(17);
 	$sheet->getColumnDimension("I")->setWidth(15);
 	
+	//Блок параметров по скважине, вводимых оператором
 	$sheet->getColumnDimension("J")->setWidth(11);
 	$sheet->getColumnDimension("K")->setWidth(12);
 	$sheet->getColumnDimension("L")->setWidth(17);
 	$sheet->getColumnDimension("M")->setWidth(14);
 	$sheet->getColumnDimension("N")->setWidth(15);
+	$sheet->getColumnDimension("O")->setWidth(15);
+
+	//Расчет из данных "блока параметров по скважине, вводимых оператором"
+	$sheet->getColumnDimension("P")->setWidth(30);
+	$sheet->getColumnDimension("Q")->setWidth(30);
+
+	//Блок параметров по замеру
+	$sheet->getColumnDimension("R")->setWidth(15);
+	$sheet->getColumnDimension("S")->setWidth(15);
+	$sheet->getColumnDimension("T")->setWidth(15);
+	$sheet->getColumnDimension("U")->setWidth(15);
+	$sheet->getColumnDimension("V")->setWidth(15);
+	$sheet->getColumnDimension("W")->setWidth(15);
+	$sheet->getColumnDimension("X")->setWidth(15);
+	$sheet->getColumnDimension("Y")->setWidth(15);
+	$sheet->getColumnDimension("Z")->setWidth(15);
+	$sheet->getColumnDimension("AA")->setWidth(15);
+	$sheet->getColumnDimension("AB")->setWidth(15);
+	$sheet->getColumnDimension("AC")->setWidth(15);
+
+	//Блок основных результатов по скважине
+	$sheet->getColumnDimension("AD")->setWidth(15);
+	$sheet->getColumnDimension("AE")->setWidth(15);
+	$sheet->getColumnDimension("AF")->setWidth(15);
+	$sheet->getColumnDimension("AG")->setWidth(15);
+	$sheet->getColumnDimension("AH")->setWidth(15);
+	$sheet->getColumnDimension("AI")->setWidth(15);
+	$sheet->getColumnDimension("AJ")->setWidth(15);
+	$sheet->getColumnDimension("AK")->setWidth(15);
+	$sheet->getColumnDimension("AL")->setWidth(15);
+
+	//Общие технологические параметры установки при измерении
+	$sheet->getColumnDimension("AM")->setWidth(15);
+	$sheet->getColumnDimension("AN")->setWidth(15);
+	$sheet->getColumnDimension("AO")->setWidth(15);
+	$sheet->getColumnDimension("AP")->setWidth(15);
+	$sheet->getColumnDimension("AQ")->setWidth(15);
+	$sheet->getColumnDimension("AR")->setWidth(15);
+	$sheet->getColumnDimension("AS")->setWidth(15);
+	$sheet->getColumnDimension("AT")->setWidth(15);
+	$sheet->getColumnDimension("AU")->setWidth(15);
+	$sheet->getColumnDimension("AV")->setWidth(15);
+	$sheet->getColumnDimension("AW")->setWidth(15);
+	$sheet->getColumnDimension("AX")->setWidth(15);
+
+	//FLOWSIC
+	$sheet->getColumnDimension("AY")->setWidth(15);
+	$sheet->getColumnDimension("AZ")->setWidth(15);
+	$sheet->getColumnDimension("BA")->setWidth(15);
+	$sheet->getColumnDimension("BB")->setWidth(15);
+
+	//ROTAMASS
+	$sheet->getColumnDimension("BC")->setWidth(15);
+	$sheet->getColumnDimension("BD")->setWidth(15);
+	$sheet->getColumnDimension("BE")->setWidth(15);
+
+	//ВСН-2
+	$sheet->getColumnDimension("BF")->setWidth(15);
+
+
+
+
+
 	
 
 
@@ -293,10 +359,17 @@
 	$sheet->mergeCells("A1:D1");
 	$sheet->mergeCells("E1:I1");
 	$sheet->mergeCells("J1:O1");
+	$sheet->mergeCells("P1:Q1");
+	$sheet->mergeCells("R1:AC1");
+	$sheet->mergeCells("AD1:AL1");
+	$sheet->mergeCells("AM1:AX1");
+	$sheet->mergeCells("AY1:BB1");
+	$sheet->mergeCells("BC1:BE1");
+	$sheet->mergeCells("BF1:BF1");
 	
 
 	//Ровняем их по середине
-	$sheet->getStyle("A1:BB1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	$sheet->getStyle("A1:BF1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 
 	//Создаем стиль для фона шапки
 	$bd = array(
@@ -305,7 +378,7 @@
 				'color'=>array('rgb'=>'CFCFCF')
 				)
 	);
-	$sheet->getStyle("A1:BB3")->applyFromArray($bd); //применяем
+	$sheet->getStyle("A1:BF3")->applyFromArray($bd); //применяем
 
 	//Создаем стиль для рамки шапки
 	$border = array(
@@ -318,12 +391,12 @@
 					'style'=>PHPExcel_Style_Border::BORDER_THIN,
 					'color'=>array('rgb'=>'000000')
 				)));
-	$sheet->getStyle("A1:BB3")->applyFromArray($border); //применяем
+	$sheet->getStyle("A1:BF3")->applyFromArray($border); //применяем
 
 	// Другие свойства шапки
-	$sheet->getStyle("A2:BB3")->getAlignment()->setWrapText(true);
-	$sheet->getStyle("A1:BB3")->getFont()->getColor()->setRGB('701d18'); 
-	$sheet->getStyle("A1:BB3")->getFont()->setBold(true);
+	$sheet->getStyle("A2:BF3")->getAlignment()->setWrapText(true);
+	$sheet->getStyle("A1:BF3")->getFont()->getColor()->setRGB('701d18'); 
+	$sheet->getStyle("A1:BF3")->getFont()->setBold(true);
 
 	// Фиксируем шапку
 	$sheet->freezePane('A4');
@@ -339,13 +412,13 @@
 	$sheet->setCellValue("A1", "Блок идентификационных параметров скважины");
 	$sheet->setCellValue("E1", "Блок идентификационных данных о режиме измерения");
 	$sheet->setCellValue("J1", "Блок параметров по скважине, вводимых оператором");
-	$sheet->setCellValue("O1", "Блок параметров по замеру");
-	$sheet->setCellValue("AA1", "Блок основных результатов по скважине");
-	$sheet->setCellValue("AI1", "Общие технологические параметры установки при измерении");
-	$sheet->setCellValue("AU1", "Ультразвуковой расходомер FLOWSIC");
-	$sheet->setCellValue("AY1", "Кориолисовый расходомер ROTAMASS");
-
-
+	$sheet->setCellValue("P1", "Расчет из данных блока, вводимых оператором");
+	$sheet->setCellValue("R1", "Блок параметров по замеру");
+	$sheet->setCellValue("AD1", "Блок основных результатов по скважине");
+	$sheet->setCellValue("AM1", "Общие технологические параметры установки при измерении");
+	$sheet->setCellValue("AY1", "FLOWSIC");
+	$sheet->setCellValue("BC1", "ROTAMASS");
+	$sheet->setCellValue("BF1", "ВСН-2");
 
 	// -----------вторая строка шапки--------------------------------
 	//Блок идентификационных параметров скважины
@@ -369,8 +442,65 @@
 	$sheet->setCellValue("N2", "Плотность стабильного конденсата");
 	$sheet->setCellValue("O2", "Масса пробы");
 
-	
-	
+	//Расчет из данных "блока параметров по скважине, вводимых оператором"
+	$sheet->setCellValue("P2", "Масса растворенного газа");
+	$sheet->setCellValue("Q2", "Массовая доля растворенного газа");
+
+	//Блок параметров по замеру
+	$sheet->setCellValue("R2", "(ГК брутто)");
+	$sheet->setCellValue("S2", "(ГК нетто)");
+	$sheet->setCellValue("T2", "Накопленная масса воды");
+	$sheet->setCellValue("U2", "Накопленная масса чистого конд");
+	$sheet->setCellValue("V2", "Накопл.объем газа в УИГ");
+	$sheet->setCellValue("W2", "Накопленный V чистого газа");
+	$sheet->setCellValue("X2", "Накопленная масса газа в линии ГЖС (газ дегазации)");
+	$sheet->setCellValue("Y2", "Накопленный объем газа в линии ГЖС (газ дегазации)");
+	$sheet->setCellValue("Z2", "Масса газа, прошедшая через УИГ");
+	$sheet->setCellValue("AA2", "Масса WC5+");
+	$sheet->setCellValue("AB2", "Масса воды, прошедшя через УИГ");
+	$sheet->setCellValue("AC2", "Масса КЖ, прошедшая через УИГ");
+
+	//Блок основных результатов по скважине
+	$sheet->setCellValue("AD2", "Дебит жидкости");
+	$sheet->setCellValue("AE2", "Дебит конденсата");
+	$sheet->setCellValue("AF2", "Дебит воды");
+	$sheet->setCellValue("AG2", "Дебит чистого конденсата");
+	$sheet->setCellValue("AH2", "Дебит кап.жидкости в газе сепар.");
+	$sheet->setCellValue("AI2", "Дебит газа сепарации");
+	$sheet->setCellValue("AJ2", "Дебит раств.газа в жидкости");
+	$sheet->setCellValue("AK2", "Дебит раств.газа в жидкости");
+	$sheet->setCellValue("AL2", "Дебит чистого газа");
+
+	//Общие технологические параметры установки при измерении
+	$sheet->setCellValue("AM2", "Температура во входном коллекторе");
+	$sheet->setCellValue("AN2", "Давление во входном коллекторе");
+	$sheet->setCellValue("AO2", "Давление на всасе Н-1");
+	$sheet->setCellValue("AP2", "Перепад давления на фильтре");
+	$sheet->setCellValue("AQ2", "Давление на выкиде Н-1");
+	$sheet->setCellValue("AR2", "Давление в газосепараторе ГС-1");
+	$sheet->setCellValue("AS2", "Уровень в емкости Е-1");
+	$sheet->setCellValue("AT2", "Темп в емкости Е-1");
+	$sheet->setCellValue("AU2", "Темп в вых. коллек жидк");
+	$sheet->setCellValue("AV2", "Давл в вых. коллек жидк");
+	$sheet->setCellValue("AW2", "Темп в вых. коллек газа");
+	$sheet->setCellValue("AX2", "Давл в вых. коллек газа");
+
+	//FLOWSIC
+	$sheet->setCellValue("AY2", "Давление в линии газа");
+	$sheet->setCellValue("AZ2", "Температура в линии газа");
+	$sheet->setCellValue("BA2", "Дебит газа FLOWSIC");
+	$sheet->setCellValue("BB2", "Дебит газа FLOWSIC");
+
+	//ROTAMASS
+	$sheet->setCellValue("BC2", "Дебит жидкости");
+	$sheet->setCellValue("BD2", "Масса жидкости");
+	$sheet->setCellValue("BE2", "Плотность жидкости");
+
+	//ВСН-2
+	$sheet->setCellValue("BF2", "Обводнённость");
+
+
+
 
 
 	// -----------третья строка шапки--------------------------------
@@ -394,10 +524,66 @@
 	$sheet->setCellValue("M3", "кг");
 	$sheet->setCellValue("N3", "г/см³");
 	$sheet->setCellValue("O3", "кг");
-	
-	
-	
-	
+
+	//Расчет из данных "блока параметров по скважине, вводимых оператором"
+	$sheet->setCellValue("P3", "кг");
+	$sheet->setCellValue("Q3", "% масс");
+
+	//Блок параметров по замеру
+	$sheet->setCellValue("R3", "т");
+	$sheet->setCellValue("S3", "т");
+	$sheet->setCellValue("T3", "т");
+	$sheet->setCellValue("U3", "т");
+	$sheet->setCellValue("V3", "м³ ст.у.");
+	$sheet->setCellValue("W3", "м³ ст.у.");
+	$sheet->setCellValue("X3", "т");
+	$sheet->setCellValue("Y3", "м³ ст.у.");
+	$sheet->setCellValue("Z3", "т");
+	$sheet->setCellValue("AA3", "т");
+	$sheet->setCellValue("AB3", "т");
+	$sheet->setCellValue("AC3", "т");
+
+	//Блок основных результатов по скважине
+	$sheet->setCellValue("AD3", "т/сут");
+	$sheet->setCellValue("AE3", "т/сут");
+	$sheet->setCellValue("AF3", "т/сут");
+	$sheet->setCellValue("AG3", "т/сут");
+	$sheet->setCellValue("AH3", "т/сут");
+	$sheet->setCellValue("AI3", "ст.м³/сут");
+	$sheet->setCellValue("AJ3", "т/сут");
+	$sheet->setCellValue("AK3", "ст.м³/сут");
+	$sheet->setCellValue("AL3", "ст.м³/сут");
+
+	//Общие технологические параметры установки при измерении
+	$sheet->setCellValue("AM3", "°С");
+	$sheet->setCellValue("AN3", "МПа");
+	$sheet->setCellValue("AO3", "кПа");
+	$sheet->setCellValue("AP3", "кПа");
+	$sheet->setCellValue("AQ3", "МПа");
+	$sheet->setCellValue("AR3", "МПа");
+	$sheet->setCellValue("AS3", "%");
+	$sheet->setCellValue("AT3", "°С");
+	$sheet->setCellValue("AU3", "°С");
+	$sheet->setCellValue("AV3", "МПа");
+	$sheet->setCellValue("AW3", "°С");
+	$sheet->setCellValue("AX3", "МПа");
+
+	//FLOWSIC
+	$sheet->setCellValue("AY3", "МПа");
+	$sheet->setCellValue("AZ3", "°С");
+	$sheet->setCellValue("BA3", "м³/сут");
+	$sheet->setCellValue("BB3", "ст.м³/сут");
+
+	//ROTAMASS
+	$sheet->setCellValue("BC3", "т/сут");
+	$sheet->setCellValue("BD3", "т");
+	$sheet->setCellValue("BE3", "кг/м³");
+
+	//ВСН-2
+	$sheet->setCellValue("BF3", "% объем.");
+
+
+
 	
 	
 
@@ -429,21 +615,81 @@
 			$sheet->setCellValue("I".$num_str, "по данным ХАЛ");
 		}
 
-		//Блок параметров по скважине, вводимых оператором
-		// $sheet->setCellValue("AK".$num_str, FormatEx($PT201[$nn], 3, $NULL));									//Давление на всасе Н-1
-		// $OW_M_GD 	 					= array();		//Масса газа деазации
-		// $OW_Dens_GD 	 				= array();		//Плотность газа дегазации
-		// $OW_V_PO 	 					= array();		//Водное число пробоотборника
-		// $OW_m_ZO 	 					= array();		//Масса жидкого остатка дегазации
-		// $OW_Dens_SK 	 				= array();		//Плотность стабильного конденсата
-		// $OW_m_PROB 	 					= array();		//Масса пробы
+		//Блок идентификационных данных измерения и информация о режиме измерения
+		$sheet->setCellValue("J".$num_str, $OW_M_GD[$nn]);									//Масса газа деазации
+		$sheet->setCellValue("K".$num_str, $OW_Dens_GD[$nn]);								//Плотность газа дегазации
+		$sheet->setCellValue("L".$num_str, $OW_V_PO[$nn]);									//Водное число пробоотборника
+		$sheet->setCellValue("M".$num_str, $OW_m_ZO[$nn]);									//Масса жидкого остатка дегазации
+		$sheet->setCellValue("N".$num_str, $OW_Dens_SK[$nn]);								//Плотность стабильного конденсата
+		$sheet->setCellValue("O".$num_str, $OW_m_PROB[$nn]);								//Масса пробы
+
+		//Расчет из данных "блока параметров по скважине, вводимых оператором"
+		$sheet->setCellValue("P".$num_str, $OR_m_RG[$nn]);									//Масса растворенного газа
+		$sheet->setCellValue("Q".$num_str, $OR_W_RG[$nn]);									//Массовая доля растворенного газа
+
+		//Блок параметров по замеру
+		$sheet->setCellValue("R".$num_str, $Mass_brutto_Accum[$nn]);						//Накопленная масса брутто
+		$sheet->setCellValue("S".$num_str, $Mass_netto_Accum[$nn]);							//Накопленная масса нетто
+		$sheet->setCellValue("T".$num_str, $Mass_water_Accum[$nn]);							//Накопленная масса воды
+		$sheet->setCellValue("U".$num_str, $V_Cond[$nn]);									//Накопленная масса чистого конд
+		$sheet->setCellValue("V".$num_str, $Volume_Count_Forward_sc_Accum[$nn]);			//Накопл.объем газа в УИГ
+		$sheet->setCellValue("W".$num_str, $V_Gaz[$nn]);									//Накопленный V чистого газа
+		$sheet->setCellValue("X".$num_str, $Mg_GK[$nn]);									//Накопленная масса газа в линии ГЖС
+		$sheet->setCellValue("Y".$num_str, $Vg_GK[$nn]);									//Накопленный объем газа в линии ГЖС
+		$sheet->setCellValue("Z".$num_str, $Mass_Gaz_UVP_Accum[$nn]);						//Масса газа, прошедшая через УИГ
+		$sheet->setCellValue("AA".$num_str, $WC5_Accum[$nn]);								//Масса WC5+
+		$sheet->setCellValue("AB".$num_str, $Mass_water_UIG_Accum[$nn]);					//Масса воды, прошедшя через УИГ
+		$sheet->setCellValue("AC".$num_str, $Mass_KG[$nn]);									//Масса КЖ, прошедшая через УИГ
+
+		//Блок параметров по замеру
+		$sheet->setCellValue("AD".$num_str, $Debit_liq[$nn]);								//Дебит жидкости
+		$sheet->setCellValue("AE".$num_str, $Debit_cond[$nn]);								//Дебит конденсата
+		//$sheet->setCellValue("AF".$num_str, $Debit_water[$nn]);							//Дебит воды
+		$sheet->setCellValue("AF".$num_str, ($Debit_liq[$nn] - $Debit_cond[$nn]));			//Дебит воды
+		$sheet->setCellValue("AG".$num_str, $Clean_Cond[$nn]);								//Дебит чистого конденсата
+		$sheet->setCellValue("AH".$num_str, $Debit_KG[$nn]);								//Дебит кап.жидкости в газе сепар.
+		$sheet->setCellValue("AI".$num_str, $Debit_gaz[$nn]);								//Дебит газа
+		$sheet->setCellValue("AJ".$num_str, $Debit_gas_in_liq[$nn]);						//Дебит раств.газа в жидкости
+		$sheet->setCellValue("AK".$num_str, $Debit_V_gas_in_liq[$nn]);						//Дебит раств.газа в жидкости
+		$sheet->setCellValue("AL".$num_str, $Clean_Gaz[$nn]);
+
+		//Общие технологические параметры установки при измерении
+		$sheet->setCellValue("AM".$num_str, $TT100[$nn]);									//Температура во входном коллекторе
+		$sheet->setCellValue("AN".$num_str, $PT100[$nn]);									//Давление во входном коллекторе
+		$sheet->setCellValue("AO".$num_str, $PT201[$nn]);									//Давление на всасе Н-1
+		$sheet->setCellValue("AP".$num_str, $PDT200[$nn]);									//Перепад давления на фильтре
+		$sheet->setCellValue("AQ".$num_str, $PT202[$nn]);									//Давление на выкиде Н-1
+		$sheet->setCellValue("AR".$num_str, $PT300[$nn]);									//Давление в газосепараторе ГС-1
+		$sheet->setCellValue("AS".$num_str, $LT300[$nn]);									//Уровень в емкости Е-1
+		$sheet->setCellValue("AT".$num_str, $TT300[$nn]);									//Темп в емкости Е-1
+		$sheet->setCellValue("AU".$num_str, $TT500[$nn]);									//Темп в вых. коллек жидк
+		$sheet->setCellValue("AV".$num_str, $PT500[$nn]);									//Давл в вых. коллек жидк
+		$sheet->setCellValue("AW".$num_str, $TT700[$nn]);									//Темп в вых. коллек газа
+		$sheet->setCellValue("AX".$num_str, $PT700[$nn]);									//Давл в вых. коллек газа
+
+		//FLOWSIC
+		$sheet->setCellValue("AY".$num_str, $FS_P[$nn]);									//Давление в линии газа
+		$sheet->setCellValue("AZ".$num_str, $FS_T[$nn]);									//Температура в линии газа
+		$sheet->setCellValue("BA".$num_str, $FS_Qw[$nn]);									//Дебит газа FLOWSIC
+		$sheet->setCellValue("BB".$num_str, $FS_Qs[$nn]);									//Дебит газа FLOWSIC
+
+		//ROTAMASS
+		$sheet->setCellValue("BC".$num_str, $Debit_liq[$nn]);								//Дебит жидкости ROTAMASS
+		$sheet->setCellValue("BD".$num_str, $Mass_brutto_Accum[$nn]);						//Масса жидкости ROTAMASS
+		$sheet->setCellValue("BE".$num_str, $RT_Dens[$nn]);									//Плотность жидкости ROTAMASS
+
+		//ВСН-2
+		$sheet->setCellValue("BF".$num_str, $RT_Vlaj[$nn]);									//Обводнённость влагомер
+
+
+	
 
 
 		
 
 		$num_str = $num_str +1;
 
-		echo ($nn."<br />");
+		//echo ($nn."<br />");
 
 	}
 
